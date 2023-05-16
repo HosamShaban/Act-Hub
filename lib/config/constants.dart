@@ -1,3 +1,4 @@
 class Constants{
-  static const
+  static const String baseUrl = "https://example.com/";
+
 }
