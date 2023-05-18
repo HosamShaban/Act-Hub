@@ -1,13 +1,13 @@
 import 'package:acthub/core/resources/manager_fonts.dart';
 import 'package:flutter/material.dart';
 
-TextStyle _textStyle(
-    {required double fontSize,
-    required String fontFamily,
-    required FontWeight fontWeight,
-    required Color color,
-    required TextDecoration decoration,
-    }) {
+TextStyle _textStyle({
+  required double fontSize,
+  required String fontFamily,
+  required FontWeight fontWeight,
+  required Color color,
+  required TextDecoration decoration,
+}) {
   return TextStyle(
     fontSize: fontSize,
     fontFamily: fontFamily,
@@ -17,45 +17,44 @@ TextStyle _textStyle(
   );
 }
 
-TextStyle getRegularTextStyle({required double fontSize,
-required Color color,
-TextDecoration decoration = TextDecoration.none,
-
-}){
-  return _textStyle(
-      fontSize: fontSize,
-      color: color,
-     fontFamily: ManagerFontFamily.fontFamily,
-     fontWeight: ManagerFontWight.regular,
-     decoration: decoration
-  );
-}
-
-TextStyle getBoldTextStyle({required double fontSize,
+TextStyle getRegularTextStyle({
+  required double fontSize,
   required Color color,
   TextDecoration decoration = TextDecoration.none,
-
-}){
+}) {
   return _textStyle(
-      fontSize: fontSize,
-      color: color,
-      fontFamily: ManagerFontFamily.fontFamily,
-      fontWeight: ManagerFontWight.bold,
-      decoration: decoration
+    fontSize: fontSize,
+    fontFamily: ManagerFontFamily.fontFamily,
+    fontWeight: ManagerFontWight.regular,
+    color: color,
+    decoration: decoration,
   );
 }
 
-TextStyle getMediumTextStyle({required double fontSize,
+TextStyle getBoldTextStyle({
+  required double fontSize,
   required Color color,
   TextDecoration decoration = TextDecoration.none,
-
-}){
+}) {
   return _textStyle(
-      fontSize: fontSize,
-      color: color,
-      fontFamily: ManagerFontFamily.fontFamily,
-      fontWeight: ManagerFontWight.medium,
-      decoration: decoration
+    fontSize: fontSize,
+    fontFamily: ManagerFontFamily.fontFamily,
+    fontWeight: ManagerFontWight.bold,
+    color: color,
+    decoration: decoration,
   );
 }
 
+TextStyle getMediumTextStyle({
+  required double fontSize,
+  required Color color,
+  TextDecoration decoration = TextDecoration.none,
+}) {
+  return _textStyle(
+    fontSize: fontSize,
+    fontFamily: ManagerFontFamily.fontFamily,
+    fontWeight: ManagerFontWight.medium,
+    color: color,
+    decoration: decoration,
+  );
+}
