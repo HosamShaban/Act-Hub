@@ -1,4 +1,5 @@
 import 'package:acthub/config/constants.dart';
+import 'package:acthub/config/dependency_injection.dart';
 import 'package:acthub/core/service/theme_service.dart';
 import 'package:acthub/routes/routes.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 void main() {
+  initModule();
   runApp(MyApp());
 }
 
