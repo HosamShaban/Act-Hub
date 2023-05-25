@@ -1,5 +1,6 @@
 import 'package:acthub/config/dependency_injection.dart';
 import 'package:acthub/core/resources/manager_string.dart';
+import 'package:acthub/features/auth/presentation/view/login_view.dart';
 import 'package:acthub/features/out_boarding/presentation%20/view/out_boarding_view.dart';
 import 'package:acthub/features/splash/presentation/view/splash_view.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 class Routes {
   static const String splashView = '/splash_view';
   static const String outBoardingView = '/out_boarding_view';
+  static const String loginView = '/login_view';
 }
 
 class RouteGenerator {
@@ -18,6 +20,8 @@ class RouteGenerator {
       case Routes.outBoardingView:
         initOutBoarding();
         return MaterialPageRoute(builder: (_) => const OutBoardingView());
+      case Routes.loginView:
+        return MaterialPageRoute(builder: (_) => const LoginView());
       default:
         return unDefinedRoute();
     }
