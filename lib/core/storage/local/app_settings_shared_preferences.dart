@@ -17,4 +17,8 @@ class AppSettingsSharedPreferences {
         .getBool(ConstantsPrefsKey.outBoardingViewedKey)
         .onNull();
   }
+
+  void clear() {
+    _sharedPreferences.clear();
+  }
 }
