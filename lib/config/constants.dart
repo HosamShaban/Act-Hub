@@ -8,3 +8,7 @@ class Constants {
   static const int outBoardingDurationTime = 1;
   static const int sliderItems = 3;
 }
+
+class ConstantsPrefsKey {
+  static const String outBoardingViewedKey = 'out_boarding_viewed';
+}
