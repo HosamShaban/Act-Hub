@@ -61,6 +61,10 @@ class OutBoardingView extends StatelessWidget {
                 Visibility(
                   visible: controller.isNotLastedPage(),
                   replacement: mainButton(
+                      onPressed: () {
+                        controller.getStart();
+                      },
+
                       child: Text(
                         ManagerString.getStartButton,
                         style: getRegularTextStyle(

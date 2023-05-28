@@ -1,9 +1,23 @@
+import 'package:acthub/core/storage/local/app_settings_shared_preferences.dart';
 import 'package:acthub/features/out_boarding/presentation%20/controller/out_boarding_controller.dart';
 import 'package:acthub/features/splash/presentation/controller/splash_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final instance = GetIt.instance;
+
+initModule() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
+
+  instance.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
+
+  instance.registerLazySingleton<AppSettingsSharedPreferences>(
+      () => AppSettingsSharedPreferences(instance()));
+}
 
 initSplash() {
   Get.put<SplashController>(SplashController());
