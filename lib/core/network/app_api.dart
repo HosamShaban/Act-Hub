@@ -4,7 +4,7 @@ import 'package:retrofit/http.dart';
 
 part 'app_api.g.dart';
 
-@RestApi(baseUrl: Constants.baseUrl)
+@RestApi(baseUrl: ApiConstants.baseUrl)
 abstract class AppApi {
   factory AppApi(
     Dio dio, {
