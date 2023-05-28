@@ -25,8 +25,8 @@ class DioFactory {
     );
     InterceptorsWrapper interceptorsWrapper = InterceptorsWrapper(onRequest:
         (RequestOptions options, RequestInterceptorHandler handler) async {
-      String token = _appSettingsPreferences.getToken();
-      options.headers['Authorization'] = 'Bearer $token';
+      options.headers[ApiConstants.authorization] =
+          getAuthorization(_appSettingsPreferences.getToken());
       return handler.next(options);
     });
     dio.interceptors.add(interceptorsWrapper);
