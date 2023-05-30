@@ -11,7 +11,9 @@ Widget mainButton(
     double? height,
     double? elevation}) {
   return MaterialButton(
-    onPressed: onPressed.onNull(),
+    onPressed: () {
+      onPressed ?? () {};
+    },
     shape: shapeBorder ??
         RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(
