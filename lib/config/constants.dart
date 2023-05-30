@@ -20,4 +20,8 @@ class ApiConstants {
   static const int receiveTimeOutDuration = 120;
   static const String email = 'email';
   static const String password = 'password';
+  static const String message = 'message';
+  static const String error = 'error';
+  static const String errors = 'errors';
+  static const String badRequest = 'bad request';
 }
