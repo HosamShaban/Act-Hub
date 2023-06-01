@@ -22,6 +22,7 @@ class ApiConstants {
   static const String password = 'password';
   static const String message = 'message';
   static const String error = 'error';
+  static const String token = 'token';
   static const String errors = 'errors';
   static const String badRequest = 'bad request';
   static const String noInternetConnection = ' No InternetConnection';
