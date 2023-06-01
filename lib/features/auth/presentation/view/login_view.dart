@@ -7,6 +7,7 @@ import 'package:acthub/core/resources/manager_string.dart';
 import 'package:acthub/core/resources/manager_styles.dart';
 import 'package:acthub/core/validator/validator.dart';
 import 'package:acthub/core/widgets/base_text_form_field.dart';
+import 'package:acthub/core/widgets/mainButton.dart';
 import 'package:acthub/core/widgets/scaffold_with_background_image.dart';
 import 'package:acthub/features/auth/presentation/controller/login_controller.dart';
 import 'package:flutter/material.dart';
@@ -76,6 +77,24 @@ class LoginView extends StatelessWidget {
                         validator: (value) => _failedValidator.validatePassword(
                           value,
                         ),
+                      ),
+                      SizedBox(height: ManagerHeight.h40),
+                      mainButton(
+                          child: Text(
+                            ManagerString.login,
+                            style: getRegularTextStyle(
+                                fontSize: ManagerFontSize.s16,
+                                color: ManagerColors.white
+                            ),
+                          ),
+                        minWidth: double.infinity,
+                        color: ManagerColors.primaryColor,
+                        height: ManagerHeight.h40,
+                        onPressed: (){
+                            if(controller.formKey.currentState!.validate()){
+                              controller.login();
+                            }
+                        }
                       )
                     ],
                   ),
