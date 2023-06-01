@@ -8,8 +8,6 @@ class Constants {
   static const int sliderItems = 3;
   static const int loginFirstPartFlex = 1;
   static const int loginSecondPartFlex = 3;
-
-
 }
 
 class ConstantsPrefsKey {
