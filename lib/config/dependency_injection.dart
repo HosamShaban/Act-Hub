@@ -6,6 +6,7 @@ import 'package:acthub/features/auth/data/data_source/remote_login_data_source.d
 import 'package:acthub/features/auth/data/repository_impl/login_repository_impl.dart';
 import 'package:acthub/features/auth/domain/repository/login_repository.dart';
 import 'package:acthub/features/auth/domain/use_case/login_use_case.dart';
+import 'package:acthub/features/auth/presentation/controller/login_controller.dart';
 import 'package:acthub/features/out_boarding/presentation%20/controller/out_boarding_controller.dart';
 import 'package:acthub/features/splash/presentation/controller/splash_controller.dart';
 import 'package:dio/dio.dart';
@@ -78,4 +79,6 @@ initLoginModule() {
           instance<LoginRepository>(),
         ));
   }
+
+  Get.put<LoginController>(LoginController());
 }
