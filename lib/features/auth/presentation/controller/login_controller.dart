@@ -19,4 +19,12 @@ class LoginController extends GetxController {
       print('success');
     });
   }
+
+  @override
+  void onClose() {
+    email.dispose();
+    password.dispose();
+    formKey.currentState!.dispose();
+    super.onClose();
+  }
 }
