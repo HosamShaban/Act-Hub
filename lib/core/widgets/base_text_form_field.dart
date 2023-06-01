@@ -13,6 +13,8 @@ TextFormField baseTextFormField({
   validator,
 }) {
   return TextFormField(
+    style: getRegularTextStyle(
+        fontSize: ManagerFontSize.s16, color: ManagerColors.black),
     controller: controller,
     keyboardType: keyboardType,
     cursorColor: ManagerColors.primaryColor,

@@ -84,18 +84,16 @@ class LoginView extends StatelessWidget {
                             ManagerString.login,
                             style: getRegularTextStyle(
                                 fontSize: ManagerFontSize.s16,
-                                color: ManagerColors.white
-                            ),
+                                color: ManagerColors.white),
                           ),
-                        minWidth: double.infinity,
-                        color: ManagerColors.primaryColor,
-                        height: ManagerHeight.h40,
-                        onPressed: (){
-                            if(controller.formKey.currentState!.validate()){
+                          minWidth: double.infinity,
+                          color: ManagerColors.primaryColor,
+                          height: ManagerHeight.h40,
+                          onPressed: () {
+                            if (controller.formKey.currentState!.validate()) {
                               controller.login();
                             }
-                        }
-                      )
+                          })
                     ],
                   ),
                 );
