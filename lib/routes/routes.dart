@@ -21,6 +21,7 @@ class RouteGenerator {
         initOutBoarding();
         return MaterialPageRoute(builder: (_) => const OutBoardingView());
       case Routes.loginView:
+        initLoginModule();
         return MaterialPageRoute(builder: (_) => const LoginView());
       default:
         return unDefinedRoute();
