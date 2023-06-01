@@ -14,4 +14,7 @@ class ManagerString {
   static const String getStartButton = 'Let\'s get started';
   static const String bearer = 'Bearer';
   static const String login = 'Login';
+  static const String email = 'email';
+  static const String password = 'password';
+  static const String invalidEmail = 'Invalid Email';
 }
