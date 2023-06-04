@@ -7,39 +7,50 @@ import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class DioFactory {
-  final AppSettingsSharedPreferences _appSettingsPreferences =
+  final AppSettingsSharedPreferences _appSettingsSharedPreferences =
       instance<AppSettingsSharedPreferences>();
 
   Future<Dio> getDio() async {
     Dio dio = Dio();
     Map<String, String> headers = {
       ApiConstants.authorization:
-          getAuthorization(_appSettingsPreferences.getToken()),
+          getAuthorization(_appSettingsSharedPreferences.getToken()),
+      ApiConstants.acceptLanguage: ApiConstants.english,
     };
+
     dio.options = BaseOptions(
       baseUrl: ApiConstants.baseUrl,
       headers: headers,
-      receiveTimeout:
-          const Duration(seconds: ApiConstants.receiveTimeOutDuration),
-      sendTimeout: const Duration(seconds: ApiConstants.sendTimeOutDuration),
+      sendTimeout: const Duration(
+        seconds: ApiConstants.sendTimeOutDuration,
+      ),
+      receiveTimeout: const Duration(
+        seconds: ApiConstants.receiveTimeOutDuration,
+      ),
     );
+
     InterceptorsWrapper interceptorsWrapper = InterceptorsWrapper(onRequest:
         (RequestOptions options, RequestInterceptorHandler handler) async {
-      options.headers[ApiConstants.authorization] =
-          getAuthorization(_appSettingsPreferences.getToken());
+      options.headers[ApiConstants.authorization] = getAuthorization(
+        _appSettingsSharedPreferences.getToken(),
+      );
       return handler.next(options);
     });
+
     dio.interceptors.add(interceptorsWrapper);
+
     if (!kReleaseMode) {
       dio.interceptors.add(
         PrettyDioLogger(
-            requestBody: true,
-            responseHeader: true,
-            responseBody: true,
-            requestHeader: true,
-            request: true),
+          responseBody: true,
+          requestBody: true,
+          responseHeader: true,
+          requestHeader: true,
+          request: true,
+        ),
       );
     }
+
     return dio;
   }
 
