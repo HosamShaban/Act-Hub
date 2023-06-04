@@ -9,21 +9,50 @@ class AppSettingsSharedPreferences {
 
   Future<void> setOutBoardingViewed() async {
     await _sharedPreferences.setBool(
-        ConstantsPrefsKey.outBoardingViewedKey, true);
+      ConstantsPrefsKey.outBoardingViewedKey,
+      true,
+    );
   }
 
   bool getOutBoardingViewed() {
     return _sharedPreferences
-        .getBool(ConstantsPrefsKey.outBoardingViewedKey)
+        .getBool(
+          ConstantsPrefsKey.outBoardingViewedKey,
+        )
         .onNull();
   }
 
   Future<void> setToken(String token) async {
-    await _sharedPreferences.setString(ConstantsPrefsKey.tokenKey, token);
+    await setLoggedIn();
+    await _sharedPreferences.setString(ConstantsPrefsKey.token, token);
   }
 
   String getToken() {
-    return _sharedPreferences.getString(ConstantsPrefsKey.tokenKey).onNull();
+    return _sharedPreferences.getString(ConstantsPrefsKey.token).onNull();
+  }
+
+  Future<void> setEmail(String email) async {
+    await _sharedPreferences.setString(ConstantsPrefsKey.email, email);
+  }
+
+  String getEmail() {
+    return _sharedPreferences.getString(ConstantsPrefsKey.email).onNull();
+  }
+
+  Future<void> setPassword(String password) async {
+    await _sharedPreferences.setString(ConstantsPrefsKey.password, password);
+  }
+
+  String getPassword() {
+    return _sharedPreferences.getString(ConstantsPrefsKey.password).onNull();
+  }
+
+  Future<void> setLoggedIn() async {
+    await _sharedPreferences.setBool(ConstantsPrefsKey.loggedIn, true);
+  }
+
+  bool loggedIn() {
+    return _sharedPreferences.getBool(ConstantsPrefsKey.loggedIn).onNull();
   }
 
   void clear() {
