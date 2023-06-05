@@ -27,6 +27,8 @@ class ApiConstants {
   static const int receiveTimeOutDuration = 120;
   static const String email = 'email';
   static const String password = 'password';
+  static const String passwordConfirmation = 'password_confirmation';
+  static const String phone = 'phone';
   static const String message = 'message';
   static const String error = 'error';
   static const String token = 'token';
@@ -36,4 +38,6 @@ class ApiConstants {
   static const String acceptLanguage = 'Accept-Language';
   static const String english = 'en';
   static const String arabic = 'ar';
+  static const String status = 'status';
+  static const String name = 'name';
 }
