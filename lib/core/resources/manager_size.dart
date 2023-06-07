@@ -58,6 +58,7 @@ class ManagerIconSize {
   static double s8 = 8;
   static double s10 = 10;
   static double s12 = 12;
+  static double s24 = 24;
 }
 
 class ManagerOpacity {
