@@ -8,6 +8,7 @@ import 'package:acthub/core/resources/manager_string.dart';
 import 'package:acthub/core/resources/manager_styles.dart';
 import 'package:acthub/core/state_renderer/state_renderer.dart';
 import 'package:acthub/core/storage/local/app_settings_shared_preferences.dart';
+import 'package:acthub/core/widgets/dialog_button.dart';
 import 'package:acthub/core/widgets/mainButton.dart';
 import 'package:acthub/features/auth/domain/use_case/login_use_case.dart';
 import 'package:acthub/routes/routes.dart';
@@ -21,8 +22,20 @@ class LoginController extends GetxController {
   var formKey = GlobalKey<FormState>();
   final AppSettingsSharedPreferences _appSettingsSharedPreferences =
       instance<AppSettingsSharedPreferences>();
+  bool rememberMe = false;
 
-  Future<void> login(BuildContext context) async {
+  changeRememberMe(bool status) {
+    rememberMe = status;
+    update();
+  }
+
+  void performLogin(BuildContext context) {
+    if (formKey.currentState!.validate()) {
+      _login(context);
+    }
+  }
+
+  Future<void> _login(BuildContext context) async {
     dialogRender(
         context: context,
         stateRenderType: StateRenderType.popUpLoadingState,
@@ -43,26 +56,19 @@ class LoginController extends GetxController {
           padding: EdgeInsets.symmetric(
             horizontal: ManagerWidth.w65,
           ),
-          child: mainButton(
-            child: Text(
-              ManagerString.ok,
-              style: getMediumTextStyle(
-                fontSize: ManagerFontSize.s16,
-                color: ManagerColors.white,
-              ),
-            ),
-            onPressed: () {
-              Get.back();
-            },
-            color: ManagerColors.primaryColor,
-            height: ManagerHeight.h40,
-          ),
+          child: dialogButton(
+              message: ManagerString.ok,
+              onPressed: () {
+                Get.back();
+              }),
         ),
-        retryAction: () {},
       );
     }, (r) {
-      _appSettingsSharedPreferences.setEmail(email.text);
-      _appSettingsSharedPreferences.setPassword(password.text);
+      if (rememberMe) {
+        _appSettingsSharedPreferences.setEmail(email.text);
+        _appSettingsSharedPreferences.setPassword(password.text);
+        _appSettingsSharedPreferences.setLoggedIn();
+      }
       _appSettingsSharedPreferences.setToken(r.token.onNull());
       Get.back();
       dialogRender(
