@@ -10,7 +10,7 @@ class Constants {
   static const int loginSecondPartFlex = 3;
   static const double getStateWidgetRenderStateElevation = 3;
   static const int loginTimer = 1;
-
+  static const double arrowBackButtonElevation = 0;
 }
 
 class ConstantsPrefsKey {
