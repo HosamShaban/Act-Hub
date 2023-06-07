@@ -25,13 +25,16 @@ class ManagerString {
   static const String requiredPhone = 'Required Phone';
   static const String loading = 'Loading...';
   static const String ok = 'Ok';
+  static const String error = 'Error';
   static const String thanks = 'Thanks';
   static const String signUp = 'Sign Up';
   static const String signIn = 'Sign In';
+  static const String login = 'Login In';
   static const String haveAccount = 'Don’t have any account ?';
   static const String haveNotAccount = 'Don’t have any account ?';
   static const String forgotPassword = 'Forgot Password ?';
   static const String rememberMe = 'Remember me';
   static const String agreePolicy =
       'I agree to our Terms of service and Privacy policy';
+  static const String shouldAgreePolicy = 'Should Agree Policy ';
 }
