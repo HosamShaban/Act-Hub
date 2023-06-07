@@ -5,6 +5,7 @@ import 'package:acthub/core/resources/manager_string.dart';
 import 'package:acthub/core/resources/manager_styles.dart';
 import 'package:acthub/core/validator/validator.dart';
 import 'package:acthub/core/widgets/base_text_form_field.dart';
+import 'package:acthub/core/widgets/custom_check_box.dart';
 import 'package:acthub/core/widgets/mainButton.dart';
 import 'package:acthub/features/auth/presentation/controller/login_controller.dart';
 import 'package:acthub/features/auth/presentation/view/widget/auth_view.dart';
@@ -55,14 +56,11 @@ class LoginView extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Checkbox(
-                          value: true,
-                          onChanged: (value) {},
-                          activeColor: ManagerColors.primaryColor,
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(ManagerRadius.r4)),
-                        ),
+                        customCheckbox(
+                            state: controller.rememberMe,
+                            onChanged: (status) {
+                              controller.changeRememberMe(status!);
+                            }),
                         Text(
                           ManagerString.rememberMe,
                           style: getMediumTextStyle(
@@ -96,7 +94,7 @@ class LoginView extends StatelessWidget {
                     height: ManagerHeight.h40,
                     onPressed: () {
                       if (controller.formKey.currentState!.validate()) {
-                        controller.login(context);
+                        controller.performLogin(context);
                       }
                     }),
                 Row(
