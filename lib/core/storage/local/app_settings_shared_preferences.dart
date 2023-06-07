@@ -23,7 +23,6 @@ class AppSettingsSharedPreferences {
   }
 
   Future<void> setToken(String token) async {
-    await setLoggedIn();
     await _sharedPreferences.setString(ConstantsPrefsKey.token, token);
   }
 
