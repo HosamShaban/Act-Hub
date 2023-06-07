@@ -1,7 +1,4 @@
 import 'package:acthub/config/constants.dart';
-import 'package:acthub/core/resources/manager_assets.dart';
-import 'package:acthub/core/resources/manager_string.dart';
-import 'package:acthub/features/out_boarding/presentation%20/view/widgets/out_boarding_item.dart';
 import 'package:acthub/config/dependency_injection.dart';
 import 'package:acthub/core/resources/manager_assets.dart';
 import 'package:acthub/core/resources/manager_string.dart';
@@ -14,12 +11,13 @@ import 'package:get/get.dart';
 class OutBoardingController extends GetxController {
   final AppSettingsSharedPreferences _appSettingsSharedPreferences =
       instance<AppSettingsSharedPreferences>();
+
   late PageController pageController;
-  static const int firstPage = 0;
-  static const int lastPage = 2;
+  static const firstPage = 0;
+  static const lastPage = 2;
   int currentPage = firstPage;
 
-  List pageViewItems = <OutBoardingItem>[
+  final List pageViewItems = [
     OutBoardingItem(
       image: ManagerAssets.outBoardingIllustration1,
       title: ManagerString.outBoardingTitle1,
@@ -49,22 +47,12 @@ class OutBoardingController extends GetxController {
     super.onClose();
   }
 
-  void setCurrentPage(int index) {
+  Future<void> setCurrentPage(int index) async {
+    await _appSettingsSharedPreferences.setOutBoardingViewed();
     currentPage = index;
     update();
   }
 
-  Future<void> getStart() async {
-    await _appSettingsSharedPreferences.setOutBoardingViewed();
-    Get.offAllNamed(Routes.loginView);
-  }
-
-  void previousPage() {
-    if (isNotFirstPage()) {
-      animateToPage(index: --currentPage);
-      update();
-    }
-  }
   void skipPage() {
     animateToPage(index: lastPage);
     currentPage = lastPage;
@@ -72,11 +60,15 @@ class OutBoardingController extends GetxController {
   }
 
   void nextPage() {
-  Future<void> nextPage() async {
     if (isNotLastedPage()) {
       animateToPage(index: ++currentPage);
       update();
     }
+  }
+
+  Future<void> getStart() async {
+    await _appSettingsSharedPreferences.setOutBoardingViewed();
+    Get.offAllNamed(Routes.loginView);
   }
 
   void previousPage() {
