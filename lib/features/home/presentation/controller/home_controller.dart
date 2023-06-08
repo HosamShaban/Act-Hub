@@ -51,7 +51,8 @@ class HomeController extends GetxController {
         (r) => {
               sliders = r.sliders!,
               categories = r.categories!,
-              popularCourses,
+              popularCourses = r.courses!,
+              update(),
             });
   }
 
