@@ -5,19 +5,19 @@ part 'attribute_category_response.g.dart';
 @JsonSerializable()
 class AttributeCategoryResponse {
   @JsonKey(name: 'name')
-  String? name;
+  String? title;
   @JsonKey(name: 'description')
   String? description;
   @JsonKey(name: 'icon')
-  String? icon;
+  String? image;
   @JsonKey(name: 'banner')
-  String? banner;
+  String? type;
 
   AttributeCategoryResponse({
-    this.name,
+    this.title,
     this.description,
-    this.icon,
-    this.banner,
+    this.image,
+    this.type,
   });
 
   factory AttributeCategoryResponse.fromJson(Map<String, dynamic> json) =>

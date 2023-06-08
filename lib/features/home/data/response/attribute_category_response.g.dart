@@ -9,17 +9,17 @@ part of 'attribute_category_response.dart';
 AttributeCategoryResponse _$AttributeCategoryResponseFromJson(
         Map<String, dynamic> json) =>
     AttributeCategoryResponse(
-      name: json['name'] as String?,
+      title: json['name'] as String?,
       description: json['description'] as String?,
-      icon: json['icon'] as String?,
-      banner: json['banner'] as String?,
+      image: json['icon'] as String?,
+      type: json['banner'] as String?,
     );
 
 Map<String, dynamic> _$AttributeCategoryResponseToJson(
         AttributeCategoryResponse instance) =>
     <String, dynamic>{
-      'name': instance.name,
+      'name': instance.title,
       'description': instance.description,
-      'icon': instance.icon,
-      'banner': instance.banner,
+      'icon': instance.image,
+      'banner': instance.type,
     };

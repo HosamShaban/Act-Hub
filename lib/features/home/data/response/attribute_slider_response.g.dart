@@ -13,7 +13,7 @@ AttributeSliderResponse _$AttributeSliderResponseFromJson(
       description: json['description'] as String?,
       image: json['image'] as String?,
       type: json['type'] as String?,
-      id: json['id'] as int?,
+      id: json['id'] as String?,
     );
 
 Map<String, dynamic> _$AttributeSliderResponseToJson(

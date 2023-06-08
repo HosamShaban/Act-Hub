@@ -13,7 +13,7 @@ class AttributeSliderResponse {
   @JsonKey(name: 'type')
   String? type;
   @JsonKey(name: 'id')
-  int? id;
+  String? id;
 
   AttributeSliderResponse(
       {this.title, this.description, this.image, this.type, this.id});
