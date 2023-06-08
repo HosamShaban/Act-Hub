@@ -2,6 +2,7 @@ import 'package:acthub/config/constants.dart';
 import 'package:acthub/config/request_constants.dart';
 import 'package:acthub/features/auth/data/response/login_response.dart';
 import 'package:acthub/features/home/data/response/home_response.dart';
+import 'package:acthub/features/verification/data/response/verification_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 
@@ -31,4 +32,10 @@ abstract class AppApi {
 
   @GET(RequestConstants.home)
   Future<HomeResponse> home();
+
+  @POST(RequestConstants.emailVerification)
+  Future<VerificationResponse> emailVerification(
+    @Field(ApiConstants.verificationEmail) email,
+    @Field(ApiConstants.otp) otp,
+  );
 }

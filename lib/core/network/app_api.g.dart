@@ -98,12 +98,41 @@ class _AppApi implements AppApi {
     )
             .compose(
               _dio.options,
-              '/api/auth/user//Home',
+              '/api/auth/user//home',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = HomeResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<VerificationResponse> emailVerification(
+    dynamic email,
+    dynamic otp,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'email': email,
+      'otp': otp,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<VerificationResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/auth/user//email-verification',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = VerificationResponse.fromJson(_result.data!);
     return value;
   }
 
