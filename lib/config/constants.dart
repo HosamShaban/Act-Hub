@@ -11,6 +11,7 @@ class Constants {
   static const double getStateWidgetRenderStateElevation = 3;
   static const int loginTimer = 1;
   static const double arrowBackButtonElevation = 0;
+  static const int codeVerificationMaxLine = 1;
 }
 
 class ConstantsPrefsKey {
@@ -41,4 +42,6 @@ class ApiConstants {
   static const String arabic = 'ar';
   static const String status = 'status';
   static const String name = 'name';
+  static const String verificationEmail = 'email';
+  static const String otp = 'otp';
 }
