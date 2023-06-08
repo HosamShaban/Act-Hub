@@ -20,6 +20,11 @@ import 'package:acthub/features/home/presentation/controller/home_controller.dar
 import 'package:acthub/features/main/presentation/controller/main_controller.dart';
 import 'package:acthub/features/out_boarding/presentation%20/controller/out_boarding_controller.dart';
 import 'package:acthub/features/splash/presentation/controller/splash_controller.dart';
+import 'package:acthub/features/verification/data/data_source/remote_verification_data_source.dart';
+import 'package:acthub/features/verification/data/respository_impl/verify_email_respository_impl.dart';
+import 'package:acthub/features/verification/domain/repository/verification_repository.dart';
+import 'package:acthub/features/verification/domain/usecase/verification_usecase.dart';
+import 'package:acthub/features/verification/presentation/controller/verification_controller.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -168,4 +173,33 @@ initHomeModule() {
     instance.registerLazySingleton<HomeUseCase>(
         () => HomeUseCase(instance<HomeRepository>()));
   }
+}
+
+initVerificationModule() {
+  if (!GetIt.I.isRegistered<RemoteVerificationDataSource>()) {
+    instance.registerLazySingleton(
+      () => RemoteVerificationDataSourceImplementation(
+        instance<AppApi>(),
+      ),
+    );
+  }
+
+  if (!GetIt.I.isRegistered<VerificationRepository>()) {
+    instance.registerLazySingleton<VerificationRepository>(
+      () => VerificationRepositoryImpl(
+        instance<NetworkInfo>(),
+        instance<RemoteVerificationDataSource>(),
+      ),
+    );
+  }
+
+  if (!GetIt.I.isRegistered<VerificationUseCase>()) {
+    instance.registerLazySingleton(
+      () => VerificationUseCase(
+        instance<VerificationRepository>(),
+      ),
+    );
+  }
+
+  Get.put<VerificationController>(VerificationController());
 }
