@@ -1,6 +1,7 @@
 import 'package:acthub/config/constants.dart';
 import 'package:acthub/config/request_constants.dart';
 import 'package:acthub/features/auth/data/response/login_response.dart';
+import 'package:acthub/features/home/data/response/home_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 
@@ -27,4 +28,7 @@ abstract class AppApi {
     @Field(ApiConstants.passwordConfirmation) passwordConfirmation,
     @Field(ApiConstants.phone) phone,
   );
+
+  @GET(RequestConstants.home)
+  Future<HomeResponse> home();
 }

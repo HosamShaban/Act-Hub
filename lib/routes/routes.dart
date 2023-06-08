@@ -3,6 +3,7 @@ import 'package:acthub/core/resources/manager_string.dart';
 import 'package:acthub/features/auth/presentation/view/login_view.dart';
 import 'package:acthub/features/auth/presentation/view/register_view.dart';
 import 'package:acthub/features/home/presentation/view/home_view.dart';
+import 'package:acthub/features/main/presentation/view/main_view.dart';
 import 'package:acthub/features/out_boarding/presentation%20/view/out_boarding_view.dart';
 import 'package:acthub/features/splash/presentation/view/splash_view.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/material.dart';
 class Routes {
   static const String splashView = '/splash_view';
   static const String outBoardingView = '/out_boarding_view';
+  static const String mainView = '/main_view';
   static const String loginView = '/login_view';
   static const String homeView = '/home_view';
   static const String registerView = '/register_view';
@@ -29,8 +31,11 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => LoginView());
       case Routes.registerView:
         return MaterialPageRoute(builder: (_) => RegisterView());
+      case Routes.mainView:
+        initMainModule();
+        return MaterialPageRoute(builder: (_) => const MainView());
       case Routes.homeView:
-        return MaterialPageRoute(builder: (_) => const HomeView());
+        return MaterialPageRoute(builder: (_) => HomeView());
       default:
         return unDefinedRoute();
     }

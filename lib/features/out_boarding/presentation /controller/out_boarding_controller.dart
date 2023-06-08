@@ -8,7 +8,7 @@ import 'package:acthub/core/resources/manager_string.dart';
 import 'package:acthub/core/storage/local/app_settings_shared_preferences.dart';
 import 'package:acthub/features/out_boarding/presentation%20/view/widgets/out_boarding_item.dart';
 import 'package:acthub/routes/routes.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class OutBoardingController extends GetxController {
@@ -55,6 +55,7 @@ class OutBoardingController extends GetxController {
     update();
   }
 
+
   Future<void> getStart() async {
     await _appSettingsSharedPreferences.setOutBoardingViewed();
     Get.offAllNamed(Routes.loginView);
@@ -79,14 +80,15 @@ class OutBoardingController extends GetxController {
     }
   }
 
-  Future<void> getStart() async {
-    await _appSettingsSharedPreferences.setOutBoardingViewed();
-    Get.offAllNamed(Routes.loginView);
+  void skipPage() {
+    animateToPage(index: lastPage);
+    currentPage = lastPage;
+    update();
   }
 
-  void previousPage() {
-    if (isNotFirstPage()) {
-      animateToPage(index: --currentPage);
+  Future<void> nextPage() async {
+    if (isNotLastedPage()) {
+      animateToPage(index: ++currentPage);
       update();
     }
   }

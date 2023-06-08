@@ -12,6 +12,12 @@ import 'package:acthub/features/auth/domain/use_case/login_use_case.dart';
 import 'package:acthub/features/auth/domain/use_case/register_use_case.dart';
 import 'package:acthub/features/auth/presentation/controller/login_controller.dart';
 import 'package:acthub/features/auth/presentation/controller/registert_controller.dart';
+import 'package:acthub/features/home/data/data_source/remote_home_data_source.dart';
+import 'package:acthub/features/home/data/repository_implementation/home_repository_implementation.dart';
+import 'package:acthub/features/home/domain/repository/home_repository.dart';
+import 'package:acthub/features/home/domain/usecase/home_usecase.dart';
+import 'package:acthub/features/home/presentation/controller/home_controller.dart';
+import 'package:acthub/features/main/presentation/controller/main_controller.dart';
 import 'package:acthub/features/out_boarding/presentation%20/controller/out_boarding_controller.dart';
 import 'package:acthub/features/splash/presentation/controller/splash_controller.dart';
 import 'package:dio/dio.dart';
@@ -140,4 +146,26 @@ disposeRegisterModule() {
   }
 
   Get.delete<RegisterController>();
+}
+
+initMainModule() {
+  Get.put<MainController>(MainController());
+  Get.put<HomeController>(HomeController());
+}
+
+initHomeModule() {
+  if (!GetIt.I.isRegistered<RemoteHomeDataSource>()) {
+    instance.registerLazySingleton<RemoteHomeDataSource>(
+        () => RemoteHomeDataSourceImplement(instance<AppApi>()));
+  }
+
+  if (!GetIt.I.isRegistered<HomeRepository>()) {
+    instance.registerLazySingleton<HomeRepository>(() =>
+        HomeRepositoryImplementation(
+            instance<RemoteHomeDataSource>(), instance<NetworkInfo>()));
+  }
+  if (!GetIt.I.isRegistered<HomeUseCase>()) {
+    instance.registerLazySingleton<HomeUseCase>(
+        () => HomeUseCase(instance<HomeRepository>()));
+  }
 }
