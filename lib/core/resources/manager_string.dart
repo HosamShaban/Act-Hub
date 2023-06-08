@@ -37,6 +37,13 @@ class ManagerString {
   static const String agreePolicy =
       'I agree to our Terms of service and Privacy policy';
   static const String shouldAgreePolicy = 'Should Agree Policy ';
+  static const String subTitleVerification = "Enter the code please";
+  static const String verificationCode = "Verification Code";
+  static const String verifyMessage =
+      'Please , Enter the code we sent to your email to verify your account';
+  static const String invalidEmptyCode = "This field is required";
+  static const String resendCode = 'If you didn\'t receive a code';
+  static const String resend = 'Resend';
   static const String INTERNAL_SERVER_ERROR =
       'Internal Server Error, Try Again Later';
   static const String UNKNOWN = 'UnKnown, Try Again Later';
@@ -59,4 +66,7 @@ class ManagerString {
   static const String playStation = 'Play Station';
   static const String board = 'Board';
   static const String popularCourses = 'Popular Courses';
+  static const String badRequest = "Sorry Bad Request, Try Again Later";
+  static const String verificationSuccess =
+      'The code has been verified, login now';
 }
