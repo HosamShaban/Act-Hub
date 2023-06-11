@@ -1,13 +1,14 @@
-import 'package:acthub/core/resources/manager_colors.dart';
 import 'package:acthub/core/resources/manager_size.dart';
-import 'package:acthub/core/resources/manager_string.dart';
-import 'package:acthub/core/widgets/will_pop_scope.dart';
-import 'package:acthub/features/home/presentation/controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/resources/manager_colors.dart';
+import '../../../../core/resources/manager_string.dart';
+import '../../../../core/widgets/will_pop_scope.dart';
+import '../controller/home_controller.dart';
 import 'widget/custom_banner.dart';
 import 'widget/custom_category.dart';
+import 'widget/custom_course.dart';
 import 'widget/custom_text.dart';
 import 'widget/home_app_bar.dart';
 
@@ -64,10 +65,10 @@ class HomeView extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return Column(
                         children: [
-                          // CustomCourse(
-                          //   index: index,
-                          //   onTap: () => Get.to(() => CourseDescriptionView(index: index + 1)),
-                          // ),
+                          CustomCourse(
+                            index: index,
+                            // onTap: () => Get.to(() => CourseDescriptionView(index: index + 1)),
+                          ),
                           Divider(
                             indent: ManagerWidth.w14,
                             endIndent: ManagerWidth.w14,
