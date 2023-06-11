@@ -12,6 +12,7 @@ class Constants {
   static const int loginTimer = 1;
   static const double arrowBackButtonElevation = 0;
   static const int codeVerificationMaxLine = 1;
+  static const double elevation = 0;
 }
 
 class ConstantsPrefsKey {
