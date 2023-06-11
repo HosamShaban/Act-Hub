@@ -22,7 +22,7 @@ class OutBoardingItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: ManagerHeight.h70),
+        SizedBox(height: ManagerHeight.h30),
         SvgPicture.asset(
           image,
           width: double.infinity,
