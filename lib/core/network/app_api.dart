@@ -1,7 +1,10 @@
 import 'package:acthub/config/constants.dart';
 import 'package:acthub/config/request_constants.dart';
 import 'package:acthub/features/auth/data/response/login_response.dart';
+import 'package:acthub/features/forget_password/data/response/forget_password_response.dart';
 import 'package:acthub/features/home/data/response/home_response.dart';
+import 'package:acthub/features/reset_password/data/response/reset_password_response.dart';
+import 'package:acthub/features/verification/data/response/send_otp_response.dart';
 import 'package:acthub/features/verification/data/response/verification_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
@@ -37,5 +40,22 @@ abstract class AppApi {
   Future<VerificationResponse> emailVerification(
     @Field(ApiConstants.verificationEmail) email,
     @Field(ApiConstants.otp) otp,
+  );
+
+  @POST(RequestConstants.forgetPasswordRequest)
+  Future<ForgetPasswordResponse> forgetPassword(
+    @Field(ApiConstants.email) String email,
+  );
+
+  @POST(RequestConstants.resetPassword)
+  Future<ResetPasswordResponse> resetPassword(
+    @Field(ApiConstants.email) email,
+    @Field(ApiConstants.password) password,
+    @Field(ApiConstants.otp) otp,
+  );
+
+  @POST(RequestConstants.sendOtp)
+  Future<SendOtpResponse> sendOtp(
+    @Field(ApiConstants.email) String email,
   );
 }
