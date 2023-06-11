@@ -1,15 +1,15 @@
-import 'package:acthub/config/constants.dart';
-import 'package:acthub/core/resources/manager_colors.dart';
-import 'package:acthub/core/resources/manager_fonts.dart';
 import 'package:acthub/core/resources/manager_size.dart';
 import 'package:acthub/core/resources/manager_string.dart';
-import 'package:acthub/core/resources/manager_styles.dart';
-import 'package:acthub/core/widgets/arrow_back_button.dart';
 import 'package:acthub/core/widgets/mainButton.dart';
 import 'package:acthub/features/verification/presentation/controller/verification_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../config/constants.dart';
+import '../../../../core/resources/manager_colors.dart';
+import '../../../../core/resources/manager_fonts.dart';
+import '../../../../core/resources/manager_styles.dart';
+import '../../../../core/widgets/arrow_back_button.dart';
 import 'widget/code_verification.dart';
 
 class VerificationView extends StatelessWidget {
