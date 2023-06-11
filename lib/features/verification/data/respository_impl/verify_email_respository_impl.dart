@@ -1,13 +1,14 @@
 import 'package:acthub/config/constants.dart';
-import 'package:acthub/core/error_handler/error_handler.dart';
-import 'package:acthub/core/internet_checker/internet_checker.dart';
-import 'package:acthub/core/resources/manager_string.dart';
-import 'package:acthub/features/verification/data/data_source/remote_verification_data_source.dart';
 import 'package:acthub/features/verification/data/mapper/verification_mapper.dart';
 import 'package:acthub/features/verification/data/request/verfification_request.dart';
 import 'package:acthub/features/verification/domain/model/verification_model.dart';
-import 'package:acthub/features/verification/domain/repository/verification_repository.dart';
 import 'package:dartz/dartz.dart';
+
+import '../../../../core/error_handler/error_handler.dart';
+import '../../../../core/internet_checker/internet_checker.dart';
+import '../../../../core/resources/manager_string.dart';
+import '../../domain/repositories/verification_repository.dart';
+import '../data_source/remote_verification_data_source.dart';
 
 class VerificationRepositoryImpl implements VerificationRepository {
   final RemoteVerificationDataSource _remoteVerificationDataSource;
