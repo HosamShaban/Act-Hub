@@ -33,6 +33,7 @@ class ManagerString {
   static const String haveAccount = 'Don’t have any account ?';
   static const String haveNotAccount = 'Don’t have any account ?';
   static const String forgotPassword = 'Forgot Password ?';
+  static const String sendOtpSuccess = 'The code has been sent successfully';
   static const String rememberMe = 'Remember me';
   static const String agreePolicy =
       'I agree to our Terms of service and Privacy policy';
@@ -47,6 +48,7 @@ class ManagerString {
   static const String INTERNAL_SERVER_ERROR =
       'Internal Server Error, Try Again Later';
   static const String UNKNOWN = 'UnKnown, Try Again Later';
+  static const String sorryFailed = 'Sorry Failed';
   static const String shouldAgreePolicies = 'Should Agree Terms and Policies';
   static const String empty = '';
   static const String categories = 'Categories';
@@ -69,4 +71,15 @@ class ManagerString {
   static const String badRequest = "Sorry Bad Request, Try Again Later";
   static const String verificationSuccess =
       'The code has been verified, login now';
+  static const String passwordChangeSuccess = 'Password changed successfully';
+  static const String wrongRequestSent = 'Wrong request sent';
+  static const String forgetPassword = 'Forget Password ?';
+  static const String forgetSubTitle =
+      'To reset your password, enter \n your e-mail';
+  static const String resetSubTitle =
+      'To reset your password, enter \n otp and new password';
+  static const String confirmPass = 'Confirm Password';
+  static const String confirm = 'Confirm';
+  static const String changePassword = 'Change Password';
+  static const String notVerifiedEmail = 'Your email address is not verified..';
 }
