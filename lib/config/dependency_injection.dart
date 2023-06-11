@@ -22,7 +22,7 @@ import 'package:acthub/features/out_boarding/presentation%20/controller/out_boar
 import 'package:acthub/features/splash/presentation/controller/splash_controller.dart';
 import 'package:acthub/features/verification/data/data_source/remote_verification_data_source.dart';
 import 'package:acthub/features/verification/data/respository_impl/verify_email_respository_impl.dart';
-import 'package:acthub/features/verification/domain/repository/verification_repository.dart';
+import 'package:acthub/features/verification/domain/repositories/verification_repository.dart';
 import 'package:acthub/features/verification/domain/usecase/verification_usecase.dart';
 import 'package:acthub/features/verification/presentation/controller/verification_controller.dart';
 import 'package:dio/dio.dart';
