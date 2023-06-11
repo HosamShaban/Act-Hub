@@ -1,7 +1,8 @@
-import 'package:acthub/config/constants.dart';
-import 'package:acthub/core/resources/manager_colors.dart';
 import 'package:acthub/core/resources/manager_size.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../config/constants.dart';
+import '../../../../../core/resources/manager_colors.dart';
 
 class CodeVerification extends StatelessWidget {
   final TextEditingController controller;
