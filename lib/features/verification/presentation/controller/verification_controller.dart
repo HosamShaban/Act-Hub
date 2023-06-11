@@ -3,6 +3,7 @@ import 'package:acthub/core/extensions/extensions.dart';
 import 'package:acthub/core/resources/manager_size.dart';
 import 'package:acthub/core/resources/manager_string.dart';
 import 'package:acthub/core/state_renderer/state_renderer.dart';
+import 'package:acthub/features/verification/domain/usecase/send_otp_usecase.dart';
 import 'package:acthub/features/verification/domain/usecase/verification_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,7 +12,6 @@ import '../../../../core/cache/cache.dart';
 import '../../../../core/validator/validator.dart';
 import '../../../../core/widgets/dialog_button.dart';
 import '../../../../routes/routes.dart';
-import '../../domain/usecase/send_otp_usecase.dart';
 
 class VerificationController extends GetxController {
   late TextEditingController firstCodeTextController;
