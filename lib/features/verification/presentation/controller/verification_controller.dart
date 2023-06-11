@@ -1,12 +1,17 @@
 import 'package:acthub/config/dependency_injection.dart';
-import 'package:acthub/core/cache/cache.dart';
+import 'package:acthub/core/extensions/extensions.dart';
+import 'package:acthub/core/resources/manager_size.dart';
 import 'package:acthub/core/resources/manager_string.dart';
 import 'package:acthub/core/state_renderer/state_renderer.dart';
-import 'package:acthub/core/validator/validator.dart';
 import 'package:acthub/features/verification/domain/usecase/verification_usecase.dart';
-import 'package:acthub/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../../core/cache/cache.dart';
+import '../../../../core/validator/validator.dart';
+import '../../../../core/widgets/dialog_button.dart';
+import '../../../../routes/routes.dart';
+import '../../domain/usecase/send_otp_usecase.dart';
 
 class VerificationController extends GetxController {
   late TextEditingController firstCodeTextController;
@@ -26,6 +31,7 @@ class VerificationController extends GetxController {
   late FocusNode sixthFocusNode;
   final VerificationUseCase _verificationUseCase =
       instance<VerificationUseCase>();
+  final SendOtpUseCase _sendOtpUseCase = instance<SendOtpUseCase>();
 
   void verifyEmail(BuildContext context) async {
     CacheData cacheData = CacheData();
@@ -43,29 +49,44 @@ class VerificationController extends GetxController {
         otp: otp(),
       ),
     ))
-        .fold((l) {
-      Get.back();
-      dialogRender(
-        context: context,
-        message: l.message,
-        title: ManagerString.error,
-        stateRenderType: StateRenderType.popUpErrorState,
-        retryAction: () {
-          Get.back();
-        },
-      );
-    }, (r) {
-      Get.back();
-      dialogRender(
+        .fold(
+      (l) {
+        Get.back();
+        dialogRender(
+          context: context,
+          message: l.message,
+          title: ManagerString.error,
+          stateRenderType: StateRenderType.popUpErrorState,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: ManagerWidth.w65,
+            ),
+            child: dialogButton(
+              message: ManagerString.ok,
+              onPressed: () {
+                Get.back();
+              },
+            ),
+          ),
+        );
+      },
+      (r) {
+        Get.back();
+        dialogRender(
           context: context,
           message: ManagerString.verificationSuccess,
           title: ManagerString.thanks,
           stateRenderType: StateRenderType.popUpSuccessState,
-          retryAction: () {
-            Get.back();
-            Get.offAllNamed(Routes.loginView);
-          });
-    });
+          child: dialogButton(
+            message: ManagerString.ok,
+            onPressed: () {
+              Get.back();
+              Get.offAllNamed(Routes.loginView);
+            },
+          ),
+        );
+      },
+    );
   }
 
   otp() {
@@ -85,6 +106,32 @@ class VerificationController extends GetxController {
       stateRenderType: StateRenderType.popUpLoadingState,
       retryAction: () {},
     );
+
+    (await _sendOtpUseCase.execute(SendOtpInput(email: email))).fold((l) {
+      Get.back();
+      dialogRender(
+        context: context,
+        message: l.message,
+        title: ManagerString.error,
+        stateRenderType: StateRenderType.popUpErrorState,
+        retryAction: () {
+          Get.back();
+        },
+      );
+    }, (r) {
+      Get.back();
+      dialogRender(
+          context: context,
+          message: ManagerString.sendOtpSuccess,
+          title: '',
+          stateRenderType: StateRenderType.popUpSuccessState,
+          retryAction: () {
+            Get.back();
+            if (route.onNull() != '') {
+              Get.offAllNamed(route!);
+            }
+          });
+    });
   }
 
   @override
