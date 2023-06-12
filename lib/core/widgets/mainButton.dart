@@ -9,11 +9,11 @@ Widget mainButton(
     Color? color,
     double? minWidth,
     double? height,
+    EdgeInsetsGeometry? padding,
     double? elevation}) {
   return MaterialButton(
-    onPressed: () {
-      onPressed ?? () {};
-    },
+    padding: padding,
+    onPressed: onPressed ?? () {},
     shape: shapeBorder ??
         RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(

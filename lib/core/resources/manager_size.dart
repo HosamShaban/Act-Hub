@@ -10,8 +10,10 @@ class ManagerHeight {
   static double h16 = SizeUtil.setHeight(16);
   static double h18 = SizeUtil.setHeight(18);
   static double h20 = SizeUtil.setHeight(20);
+  static double h28 = SizeUtil.setHeight(28);
   static double h30 = SizeUtil.setHeight(30);
   static double h40 = SizeUtil.setHeight(40);
+  static double h44 = SizeUtil.setHeight(44);
   static double h48 = SizeUtil.setHeight(48);
   static double h50 = SizeUtil.setHeight(52);
   static double h60 = SizeUtil.setHeight(60);
@@ -22,11 +24,15 @@ class ManagerHeight {
   static double h100 = SizeUtil.setHeight(100);
   static double h110 = SizeUtil.setHeight(110);
   static double h160 = SizeUtil.setHeight(160);
+  static double h205 = SizeUtil.setHeight(205);
   static double h206 = SizeUtil.setHeight(206);
+  static double h240 = SizeUtil.setHeight(240);
+  static double h490 = SizeUtil.setHeight(490);
   static double h500 = SizeUtil.setHeight(500);
 }
 
 class ManagerWidth {
+  static double w1 = SizeUtil.setWidth(1);
   static double w2 = SizeUtil.setWidth(2);
   static double w4 = SizeUtil.setWidth(4);
   static double w6 = SizeUtil.setWidth(6);
@@ -37,6 +43,8 @@ class ManagerWidth {
   static double w16 = SizeUtil.setWidth(16);
   static double w18 = SizeUtil.setWidth(18);
   static double w20 = SizeUtil.setWidth(20);
+  static double w24 = SizeUtil.setWidth(24);
+  static double w30 = SizeUtil.setWidth(30);
   static double w32 = SizeUtil.setWidth(32);
   static double w40 = SizeUtil.setWidth(40);
   static double w50 = SizeUtil.setWidth(50);
@@ -55,6 +63,7 @@ class ManagerRadius {
   static double r12 = SizeUtil.setRadius(12);
   static double r14 = SizeUtil.setRadius(14);
   static double r16 = SizeUtil.setRadius(16);
+  static double r20 = SizeUtil.setRadius(20);
   static double r26 = SizeUtil.setRadius(26);
   static double r44 = SizeUtil.setRadius(44);
 }
@@ -71,7 +80,13 @@ class ManagerIconSize {
 
 class ManagerOpacity {
   static double op0_2 = 0.2;
+  static double op0_3 = 0.3;
   static double op0_4 = 0.4;
   static double op0_5 = 0.5;
   static double op0_6 = 0.6;
+}
+
+class ConstantSize {
+  static double s5 = 5;
+  static double s2 = 5;
 }

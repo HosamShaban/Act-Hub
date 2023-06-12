@@ -19,7 +19,7 @@ class SplashController extends GetxController {
         if (_appSettingsSharedPreferences.loggedIn()) {
           Get.offAllNamed(Routes.mainView);
         } else {
-          Get.offAllNamed(Routes.loginView);
+          Get.offAllNamed(Routes.outBoardingView);
         }
       } else {
         Get.offAllNamed(
