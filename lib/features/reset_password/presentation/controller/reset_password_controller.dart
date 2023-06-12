@@ -1,27 +1,27 @@
-import 'package:acthub/config/dependency_injection.dart';
-import 'package:acthub/core/extensions/extensions.dart';
-import 'package:acthub/core/resources/manager_size.dart';
-import 'package:acthub/core/resources/manager_string.dart';
+import 'package:acthub/core/cache/cache.dart';
 import 'package:acthub/core/state_renderer/state_renderer.dart';
-import 'package:acthub/features/verification/domain/usecase/send_otp_usecase.dart';
-import 'package:acthub/features/verification/domain/usecase/verification_usecase.dart';
+import 'package:acthub/features/reset_password/domain/usecase/reset_password_use_case.dart';
+import 'package:acthub/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/cache/cache.dart';
+import '../../../../config/dependency_injection.dart';
+import '../../../../core/resources/manager_string.dart';
 import '../../../../core/validator/validator.dart';
-import '../../../../core/widgets/dialog_button.dart';
-import '../../../../routes/routes.dart';
+import '../../../verification/domain/usecase/send_otp_usecase.dart';
 
-class VerificationController extends GetxController {
+class ResetPasswordController extends GetxController {
   late TextEditingController firstCodeTextController;
   late TextEditingController secondCodeTextController;
   late TextEditingController thirdCodeTextController;
   late TextEditingController fourthCodeTextController;
   late TextEditingController fifthCodeTextController;
   late TextEditingController sixthCodeTextController;
+  late TextEditingController password;
+  late TextEditingController confirmPassword;
+  final ResetPasswordUseCase _useCase = instance<ResetPasswordUseCase>();
+  final SendOtpUseCase _sendOtpUseCase = instance<SendOtpUseCase>();
   FailedValidator validator = FailedValidator();
-  var formKey = GlobalKey<FormState>();
 
   late FocusNode firstFocusNode;
   late FocusNode secondFocusNode;
@@ -29,11 +29,12 @@ class VerificationController extends GetxController {
   late FocusNode fourthFocusNode;
   late FocusNode fifthFocusNode;
   late FocusNode sixthFocusNode;
-  final VerificationUseCase _verificationUseCase =
-      instance<VerificationUseCase>();
-  final SendOtpUseCase _sendOtpUseCase = instance<SendOtpUseCase>();
+  late FocusNode seventhFocusNode;
+  late FocusNode eightFocusNode;
 
-  void verifyEmail(BuildContext context) async {
+  var formKey = GlobalKey<FormState>();
+
+  void resetPassword(BuildContext context) async {
     CacheData cacheData = CacheData();
     String email = cacheData.getEmail();
     dialogRender(
@@ -43,59 +44,42 @@ class VerificationController extends GetxController {
       stateRenderType: StateRenderType.popUpLoadingState,
       retryAction: () {},
     );
-    (await _verificationUseCase.execute(
-      VerificationUseCaseInput(
+    (await _useCase.execute(
+      ResetPasswordInput(
         email: email,
+        password: password.text,
         otp: otp(),
       ),
     ))
-        .fold(
-      (l) {
-        Get.back();
-        dialogRender(
+        .fold((l) {
+      Get.back();
+      dialogRender(
+        context: context,
+        message: l.message,
+        title: ManagerString.sorryFailed,
+        stateRenderType: StateRenderType.popUpErrorState,
+        retryAction: () {
+          Get.back();
+        },
+      );
+    }, (r) {
+      Get.back();
+      dialogRender(
           context: context,
-          message: l.message,
-          title: ManagerString.error,
-          stateRenderType: StateRenderType.popUpErrorState,
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: ManagerWidth.w65,
-            ),
-            child: dialogButton(
-              message: ManagerString.ok,
-              onPressed: () {
-                Get.back();
-              },
-            ),
-          ),
-        );
-      },
-      (r) {
-        Get.back();
-        dialogRender(
-          context: context,
-          message: ManagerString.verificationSuccess,
-          title: ManagerString.thanks,
+          message: ManagerString.passwordChangeSuccess,
+          title: '',
           stateRenderType: StateRenderType.popUpSuccessState,
-          child: dialogButton(
-            message: ManagerString.ok,
-            onPressed: () {
-              Get.back();
-              Get.offAllNamed(Routes.loginView);
-            },
-          ),
-        );
-      },
-    );
-  }
-
-  otp() {
-    return "${firstCodeTextController.text}${secondCodeTextController.text}${thirdCodeTextController.text}${fourthCodeTextController.text}${fifthCodeTextController.text}${sixthCodeTextController.text}";
+          retryAction: () {
+            Get.back();
+            Get.offNamed(
+              Routes.loginView,
+            );
+          });
+    });
   }
 
   sendOtp({
     required BuildContext context,
-    String? route,
   }) async {
     CacheData cacheData = CacheData();
     String email = cacheData.getEmail();
@@ -127,9 +111,6 @@ class VerificationController extends GetxController {
           stateRenderType: StateRenderType.popUpSuccessState,
           retryAction: () {
             Get.back();
-            if (route.onNull() != '') {
-              Get.offAllNamed(route!);
-            }
           });
     });
   }
@@ -143,12 +124,17 @@ class VerificationController extends GetxController {
     fourthCodeTextController = TextEditingController();
     fifthCodeTextController = TextEditingController();
     sixthCodeTextController = TextEditingController();
+    sixthCodeTextController = TextEditingController();
+    password = TextEditingController();
+    confirmPassword = TextEditingController();
     firstFocusNode = FocusNode();
     secondFocusNode = FocusNode();
     thirdFocusNode = FocusNode();
     fourthFocusNode = FocusNode();
     fifthFocusNode = FocusNode();
     sixthFocusNode = FocusNode();
+    seventhFocusNode = FocusNode();
+    eightFocusNode = FocusNode();
   }
 
   @override
@@ -160,12 +146,21 @@ class VerificationController extends GetxController {
     fourthCodeTextController.dispose();
     fifthCodeTextController.dispose();
     sixthFocusNode.dispose();
+    password.dispose();
+    confirmPassword.dispose();
+
     firstFocusNode.dispose();
     secondFocusNode.dispose();
     thirdFocusNode.dispose();
     fourthFocusNode.dispose();
     fifthFocusNode.dispose();
     sixthFocusNode.dispose();
+    seventhFocusNode.dispose();
+    eightFocusNode.dispose();
     formKey.currentState!.dispose();
+  }
+
+  otp() {
+    return "${firstCodeTextController.text}${secondCodeTextController.text}${thirdCodeTextController.text}${fourthCodeTextController.text}${fifthCodeTextController.text}${sixthCodeTextController.text}";
   }
 }

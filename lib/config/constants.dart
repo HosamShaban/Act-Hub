@@ -45,4 +45,7 @@ class ApiConstants {
   static const String name = 'name';
   static const String verificationEmail = 'email';
   static const String otp = 'otp';
+  static const String accept = 'Accept';
+  static const String contentType = 'Content-Type';
+  static const String applicationJson = 'application/json';
 }
