@@ -8,8 +8,8 @@ import 'package:acthub/features/home/domain/repository/home_repository.dart';
 import 'package:dartz/dartz.dart';
 
 class HomeRepositoryImplementation implements HomeRepository {
-  RemoteHomeDataSource _dataSource;
-  NetworkInfo _networkInfo;
+  final RemoteHomeDataSource _dataSource;
+  final NetworkInfo _networkInfo;
 
   HomeRepositoryImplementation(this._dataSource, this._networkInfo);
 

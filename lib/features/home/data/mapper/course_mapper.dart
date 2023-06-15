@@ -9,7 +9,7 @@ extension CourseMapper on CourseResponse {
       id: id.onNull(),
       isRated: isRated.onNull(),
       userRate: userRate.onNull(),
-      attributesCourseModel: attributeCourseResponse?.toDomain(),
+      attributeCourseModel: attributeCourseResponse?.toDomain(),
     );
   }
 }

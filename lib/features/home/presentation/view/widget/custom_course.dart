@@ -39,7 +39,7 @@ class CustomCourse extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(ManagerRadius.r10),
                 child: Image.network(
-                  controller.popularCourses[index].attributesCourseModel!.avatar
+                  controller.popularCourses[index].attributeCourseModel!.avatar
                       .toString(),
                   width: ManagerWidth.w128,
                   height: ManagerHeight.h110,
@@ -74,8 +74,7 @@ class CustomCourse extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    controller
-                        .popularCourses[index].attributesCourseModel!.title
+                    controller.popularCourses[index].attributeCourseModel!.title
                         .toString(),
                     style: getMediumTextStyle(
                         fontSize: ManagerFontSize.s14,

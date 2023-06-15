@@ -58,6 +58,6 @@ class HomeController extends GetxController {
   }
 
   courseHoursFormat(int index) {
-    return "${popularCourses[index].attributesCourseModel!.hours.toString()} hour";
+    return "${popularCourses[index].attributeCourseModel!.hours.toString()} hour";
   }
 }

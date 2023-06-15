@@ -4,12 +4,12 @@ class CourseModel {
   int? id;
   bool? isRated;
   double? userRate;
-  AttributeCourseModel? attributesCourseModel;
+  AttributeCourseModel? attributeCourseModel;
 
   CourseModel({
     this.id,
     this.isRated,
     this.userRate,
-    this.attributesCourseModel,
+    this.attributeCourseModel,
   });
 }
