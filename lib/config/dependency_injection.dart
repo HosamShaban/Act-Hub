@@ -53,15 +53,25 @@ initModule() async {
   final SharedPreferences sharedPreferences =
       await SharedPreferences.getInstance();
 
-  instance.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
+  instance.registerLazySingleton<SharedPreferences>(
+    () => sharedPreferences,
+  );
 
   instance.registerLazySingleton<AppSettingsSharedPreferences>(
       () => AppSettingsSharedPreferences(instance()));
 
+  // TODO: ONLY FOR TEST
+  // AppSettingsSharedPreferences appSettingsSharedPreferences =
+  //     instance<AppSettingsSharedPreferences>();
+  // appSettingsSharedPreferences.clear();
+
   instance.registerLazySingleton(() => DioFactory());
 
   Dio dio = await instance<DioFactory>().getDio();
-  instance.registerLazySingleton<AppApi>(() => AppApi(dio));
+
+  instance.registerLazySingleton<AppApi>(
+    () => AppApi(dio),
+  );
 
   instance.registerLazySingleton<NetworkInfo>(
     () => NetworkInfoImpl(
@@ -91,6 +101,8 @@ initLoginModule() {
   disposeSplash();
   disposeOutBoarding();
   disposeRegisterModule();
+  initVerificationModule();
+
   if (!GetIt.I.isRegistered<RemoteLoginDataSource>()) {
     instance.registerLazySingleton<RemoteLoginDataSource>(
       () => RemoteLoginDataSourceImplement(
@@ -98,6 +110,7 @@ initLoginModule() {
       ),
     );
   }
+
   if (!GetIt.I.isRegistered<LoginRepository>()) {
     instance.registerLazySingleton<LoginRepository>(
       () => LoginRepositoryImplement(
@@ -108,9 +121,11 @@ initLoginModule() {
   }
 
   if (!GetIt.I.isRegistered<LoginUseCase>()) {
-    instance.registerFactory<LoginUseCase>(() => LoginUseCase(
-          instance<LoginRepository>(),
-        ));
+    instance.registerFactory<LoginUseCase>(
+      () => LoginUseCase(
+        instance<LoginRepository>(),
+      ),
+    );
   }
 
   Get.put<LoginController>(LoginController());
@@ -120,9 +135,11 @@ disposeLoginModule() {
   if (GetIt.I.isRegistered<RemoteLoginDataSource>()) {
     instance.unregister<RemoteLoginDataSource>();
   }
+
   if (GetIt.I.isRegistered<LoginRepository>()) {
     instance.unregister<LoginRepository>();
   }
+
   if (GetIt.I.isRegistered<LoginUseCase>()) {
     instance.unregister<LoginUseCase>();
   }
@@ -134,18 +151,27 @@ initRegisterModule() {
   disposeLoginModule();
   if (!GetIt.I.isRegistered<RemoteRegisterDataSource>()) {
     instance.registerLazySingleton<RemoteRegisterDataSource>(
-        () => RemoteRegisterDataSourceImplement(instance<AppApi>()));
+      () => RemoteRegisterDataSourceImplement(
+        instance<AppApi>(),
+      ),
+    );
   }
 
   if (!GetIt.I.isRegistered<RegisterRepository>()) {
-    instance.registerLazySingleton<RegisterRepository>(() =>
-        RegisterRepositoryImpl(
-            instance<RemoteRegisterDataSource>(), instance<NetworkInfo>()));
+    instance.registerLazySingleton<RegisterRepository>(
+      () => RegisterRepositoryImpl(
+        instance<RemoteRegisterDataSource>(),
+        instance<NetworkInfo>(),
+      ),
+    );
   }
 
   if (!GetIt.I.isRegistered<RegisterUseCase>()) {
     instance.registerLazySingleton<RegisterUseCase>(
-        () => RegisterUseCase(instance<RegisterRepository>()));
+      () => RegisterUseCase(
+        instance<RegisterRepository>(),
+      ),
+    );
   }
 
   Get.put<RegisterController>(RegisterController());
@@ -169,24 +195,36 @@ disposeRegisterModule() {
 
 initMainModule() {
   Get.put<MainController>(MainController());
-  Get.put<HomeController>(HomeController());
+  initHomeModule();
 }
 
 initHomeModule() {
   if (!GetIt.I.isRegistered<RemoteHomeDataSource>()) {
     instance.registerLazySingleton<RemoteHomeDataSource>(
-        () => RemoteHomeDataSourceImplement(instance<AppApi>()));
+      () => RemoteHomeDataSourceImplement(
+        instance<AppApi>(),
+      ),
+    );
   }
 
   if (!GetIt.I.isRegistered<HomeRepository>()) {
-    instance.registerLazySingleton<HomeRepository>(() =>
-        HomeRepositoryImplementation(
-            instance<RemoteHomeDataSource>(), instance<NetworkInfo>()));
+    instance.registerLazySingleton<HomeRepository>(
+      () => HomeRepositoryImplementation(
+        instance<RemoteHomeDataSource>(),
+        instance<NetworkInfo>(),
+      ),
+    );
   }
+
   if (!GetIt.I.isRegistered<HomeUseCase>()) {
     instance.registerLazySingleton<HomeUseCase>(
-        () => HomeUseCase(instance<HomeRepository>()));
+      () => HomeUseCase(
+        instance<HomeRepository>(),
+      ),
+    );
   }
+
+  Get.put<HomeController>(HomeController());
 }
 
 initVerificationModule() {
