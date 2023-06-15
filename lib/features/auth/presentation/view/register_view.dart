@@ -84,10 +84,11 @@ class RegisterView extends StatelessWidget {
                   Row(
                     children: [
                       customCheckbox(
-                          state: controller.isAgreementPolicy,
-                          onChanged: (status) {
-                            controller.changePolicyStatus(status!);
-                          }),
+                        state: controller.isAgreementPolicy,
+                        onChanged: (status) {
+                          controller.changePolicyStatus(status!);
+                        },
+                      ),
                       Text(
                         ManagerString.agreePolicy,
                         style: getRegularTextStyle(

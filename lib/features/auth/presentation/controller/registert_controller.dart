@@ -1,9 +1,11 @@
 import 'package:acthub/config/dependency_injection.dart';
+import 'package:acthub/core/cache/cache.dart';
 import 'package:acthub/core/resources/manager_size.dart';
 import 'package:acthub/core/resources/manager_string.dart';
 import 'package:acthub/core/state_renderer/state_renderer.dart';
 import 'package:acthub/core/widgets/dialog_button.dart';
 import 'package:acthub/features/auth/domain/use_case/register_use_case.dart';
+import 'package:acthub/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,24 +26,28 @@ class RegisterController extends GetxController {
 
   void performRegister(BuildContext context) {
     if (formKey.currentState!.validate()) {
-      if (!isAgreementPolicy) {
-        register(context);
+      if (isAgreementPolicy) {
+        _register(context);
       } else {
         dialogRender(
-            context: context,
-            stateRenderType: StateRenderType.popUpErrorState,
-            message: ManagerString.shouldAgreePolicy,
-            title: ManagerString.error,
-            child: dialogButton(
-                message: ManagerString.ok,
-                onPressed: () {
-                  Get.back();
-                }));
+          context: context,
+          stateRenderType: StateRenderType.popUpErrorState,
+          message: ManagerString.shouldAgreePolicies,
+          title: ManagerString.error,
+          child: dialogButton(
+            message: ManagerString.ok,
+            onPressed: () {
+              Get.back();
+            },
+          ),
+        );
       }
     }
   }
 
-  Future<void> register(BuildContext context) async {
+  Future<void> _register(BuildContext context) async {
+    CacheData cacheData = CacheData();
+    cacheData.setEmail(email.text);
     dialogRender(
       context: context,
       stateRenderType: StateRenderType.popUpLoadingState,
@@ -89,7 +95,7 @@ class RegisterController extends GetxController {
           child: dialogButton(
             onPressed: () {
               Get.back();
-              // Get.offAllNamed(Routes.homeView);
+              Get.offAllNamed(Routes.verificationView);
             },
             message: ManagerString.thanks,
           ),

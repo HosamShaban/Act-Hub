@@ -8,6 +8,7 @@ import 'package:acthub/features/main/presentation/view/main_view.dart';
 import 'package:acthub/features/out_boarding/presentation%20/view/out_boarding_view.dart';
 import 'package:acthub/features/reset_password/presentation/view/reset_password_view.dart';
 import 'package:acthub/features/splash/presentation/view/splash_view.dart';
+import 'package:acthub/features/verification/presentation/view/verification_view.dart';
 import 'package:flutter/material.dart';
 
 class Routes {
@@ -15,6 +16,7 @@ class Routes {
   static const String outBoardingView = '/out_boarding_view';
   static const String mainView = '/main_view';
   static const String loginView = '/login_view';
+  static const String verificationView = '/verification_view';
   static const String homeView = '/home_view';
   static const String registerView = '/register_view';
   static const String forget_password = '/forget_password_view';
@@ -34,7 +36,11 @@ class RouteGenerator {
         initLoginModule();
         return MaterialPageRoute(builder: (_) => LoginView());
       case Routes.registerView:
+        initRegisterModule();
         return MaterialPageRoute(builder: (_) => RegisterView());
+      case Routes.verificationView:
+        initVerificationModule();
+        return MaterialPageRoute(builder: (_) => const VerificationView());
       case Routes.mainView:
         initMainModule();
         return MaterialPageRoute(builder: (_) => const MainView());
