@@ -39,21 +39,22 @@ class HomeController extends GetxController {
   }
 
   Future<void> home() async {
-    BuildContext context = Get.context!;
-    (await _homeUseCase.execute()).fold(
-        (l) => {
-              dialogRender(
-                  context: context,
-                  stateRenderType: StateRenderType.popUpErrorState,
-                  message: l.message,
-                  title: '')
-            },
-        (r) => {
-              sliders = r.sliders!,
-              categories = r.categories!,
-              popularCourses = r.courses!,
-              update(),
-            });
+    BuildContext context = Get.context as BuildContext;
+    (await _homeUseCase.execute()).fold((l) {
+      dialogRender(
+          context: context,
+          stateRenderType: StateRenderType.popUpErrorState,
+          message: l.message,
+          title: '',
+          retryAction: () {
+            Get.back();
+          });
+    }, (r) {
+      sliders = r.sliders!;
+      categories = r.categories!;
+      popularCourses = r.courses!;
+      update();
+    });
   }
 
   courseHoursFormat(int index) {
