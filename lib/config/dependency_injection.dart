@@ -2,12 +2,17 @@ import 'package:acthub/core/internet_checker/internet_checker.dart';
 import 'package:acthub/core/network/app_api.dart';
 import 'package:acthub/core/network/dio_factory.dart';
 import 'package:acthub/core/storage/local/app_settings_shared_preferences.dart';
+import 'package:acthub/core/storage/remote/firebase/controllers/fb_notificatons.dart';
+import 'package:acthub/features/auth/data/data_source/remote_fcm_token_data_source.dart';
 import 'package:acthub/features/auth/data/data_source/remote_login_data_source.dart';
 import 'package:acthub/features/auth/data/data_source/remote_register_data_source.dart';
+import 'package:acthub/features/auth/data/repository_impl/fcm_token_repository_impl.dart';
 import 'package:acthub/features/auth/data/repository_impl/login_repository_impl.dart';
 import 'package:acthub/features/auth/data/repository_impl/register_repository_impl.dart';
+import 'package:acthub/features/auth/domain/repository/fcm_token_repository.dart';
 import 'package:acthub/features/auth/domain/repository/login_repository.dart';
 import 'package:acthub/features/auth/domain/repository/register_repository.dart';
+import 'package:acthub/features/auth/domain/use_case/fcm_token_use_case.dart';
 import 'package:acthub/features/auth/domain/use_case/login_use_case.dart';
 import 'package:acthub/features/auth/domain/use_case/register_use_case.dart';
 import 'package:acthub/features/auth/presentation/controller/login_controller.dart';
@@ -39,7 +44,10 @@ import 'package:acthub/features/verification/domain/repositories/verification_re
 import 'package:acthub/features/verification/domain/usecase/send_otp_usecase.dart';
 import 'package:acthub/features/verification/domain/usecase/verification_usecase.dart';
 import 'package:acthub/features/verification/presentation/controller/verification_controller.dart';
+import 'package:acthub/firebase_options.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
@@ -48,8 +56,21 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 final instance = GetIt.instance;
 
+firebaseModule() async {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  FbNotifications fb = FbNotifications();
+  await fb.requestNotificationPermissions();
+  await fb.initializeForegroundNotificationForAndroid();
+  await FbNotifications.initNotifications();
+  fb.manageNotificationAction();
+  print('object');
+  print(await FirebaseMessaging.instance.getToken());
+}
+
 initModule() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await firebaseModule();
   final SharedPreferences sharedPreferences =
       await SharedPreferences.getInstance();
 
@@ -102,6 +123,7 @@ initLoginModule() {
   disposeOutBoarding();
   disposeRegisterModule();
   initVerificationModule();
+  initFcmToken();
 
   if (!GetIt.I.isRegistered<RemoteLoginDataSource>()) {
     instance.registerLazySingleton<RemoteLoginDataSource>(
@@ -368,5 +390,36 @@ disposeSendOtp() async {
 
   if (GetIt.I.isRegistered<SendOtpUseCase>()) {
     instance.unregister<SendOtpUseCase>();
+  }
+}
+
+initFcmToken() async {
+  if (!GetIt.I.isRegistered<RemoteFcmTokenDataSource>()) {
+    instance.registerLazySingleton<RemoteFcmTokenDataSource>(
+        () => RemoteFcmTokenDataSourceImplement(instance<AppApi>()));
+  }
+
+  if (!GetIt.I.isRegistered<FcmTokenRepository>()) {
+    instance.registerLazySingleton<FcmTokenRepository>(
+        () => FcmTokenRepositoryImpl(instance(), instance()));
+  }
+
+  if (!GetIt.I.isRegistered<FcmTokenUseCase>()) {
+    instance
+        .registerFactory<FcmTokenUseCase>(() => FcmTokenUseCase(instance()));
+  }
+}
+
+disposeFcmToken() async {
+  if (GetIt.I.isRegistered<RemoteFcmTokenDataSource>()) {
+    instance.unregister<RemoteFcmTokenDataSource>();
+  }
+
+  if (GetIt.I.isRegistered<FcmTokenRepository>()) {
+    instance.unregister<FcmTokenRepository>();
+  }
+
+  if (GetIt.I.isRegistered<FcmTokenUseCase>()) {
+    instance.unregister<FcmTokenUseCase>();
   }
 }

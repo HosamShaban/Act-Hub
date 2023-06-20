@@ -14,6 +14,11 @@ class Constants {
   static const int codeVerificationMaxLine = 1;
   static const double elevation = 0;
   static const int unauthenticatedSession = 2;
+  static const String notificationChannel = 'act_hub_chanel';
+  static const String notificationChannelName = 'notificationChannelName';
+  static const String notificationChannelDescription =
+      'notificationChannelDescription';
+  static const String notificationIconName = 'notificationIconName';
 }
 
 class ConstantsPrefsKey {
@@ -25,7 +30,7 @@ class ConstantsPrefsKey {
 }
 
 class ApiConstants {
-  static const String baseUrl = "http://act-hub.actit.ps";
+  static const String baseUrl = 'https://act-hub-training.actit.ps';
   static const String authorization = 'authorization';
   static const int sendTimeOutDuration = 120;
   static const int receiveTimeOutDuration = 120;
@@ -49,4 +54,5 @@ class ApiConstants {
   static const String accept = 'Accept';
   static const String contentType = 'Content-Type';
   static const String applicationJson = 'application/json';
+  static const String fcmToken = 'fcm_token';
 }

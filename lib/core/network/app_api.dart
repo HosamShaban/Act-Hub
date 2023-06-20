@@ -1,5 +1,6 @@
 import 'package:acthub/config/constants.dart';
 import 'package:acthub/config/request_constants.dart';
+import 'package:acthub/features/auth/data/response/fcm_token_response.dart';
 import 'package:acthub/features/auth/data/response/login_response.dart';
 import 'package:acthub/features/forget_password/data/response/forget_password_response.dart';
 import 'package:acthub/features/home/data/response/home_response.dart';
@@ -57,5 +58,9 @@ abstract class AppApi {
   @POST(RequestConstants.sendOtp)
   Future<SendOtpResponse> sendOtp(
     @Field(ApiConstants.email) String email,
+  );
+  @POST(RequestConstants.fcmTokenUpdate)
+  Future<FcmTokenResponse> sendFcmToken(
+    @Field(ApiConstants.fcmToken) String? token,
   );
 }
