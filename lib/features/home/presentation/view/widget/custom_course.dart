@@ -1,13 +1,12 @@
-import 'package:acthub/core/resources/manager_assets.dart';
-import 'package:acthub/core/resources/manager_colors.dart';
-import 'package:acthub/core/resources/manager_fonts.dart';
 import 'package:acthub/core/resources/manager_size.dart';
 import 'package:acthub/core/resources/manager_string.dart';
-import 'package:acthub/core/resources/manager_styles.dart';
-import 'package:acthub/features/home/presentation/controller/home_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+
+import '../../../../../core/resources/manager_colors.dart';
+import '../../../../../core/resources/manager_fonts.dart';
+import '../../../../../core/resources/manager_styles.dart';
+import '../../controller/home_controller.dart';
 
 class CustomCourse extends StatelessWidget {
   final void Function()? onTap;
@@ -92,36 +91,7 @@ class CustomCourse extends StatelessWidget {
                   ),
                 ],
               ),
-              Spacer(),
-              Container(
-                margin: EdgeInsets.only(
-                  top: ManagerHeight.h10,
-                  right: ManagerWidth.w10,
-                  bottom: ManagerHeight.h10,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    InkWell(
-                      child: SvgPicture.asset(
-                        ManagerAssets.save,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Image.asset(ManagerAssets.star),
-                        Text(
-                          ManagerString.rate,
-                          style: getMediumTextStyle(
-                            fontSize: ManagerFontSize.s12,
-                            color: ManagerColors.grey,
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
+              const Spacer(),
             ],
           ),
         ),
