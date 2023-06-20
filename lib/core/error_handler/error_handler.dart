@@ -1,5 +1,9 @@
 import 'package:acthub/config/constants.dart';
+import 'package:acthub/config/dependency_injection.dart';
+import 'package:acthub/core/storage/local/app_settings_shared_preferences.dart';
+import 'package:acthub/routes/routes.dart';
 import 'package:dio/dio.dart';
+import 'package:get/get.dart';
 
 class Failure {
   int code;
@@ -13,14 +17,37 @@ class ErrorHandler implements Exception {
 
   ErrorHandler.handle(dynamic error) {
     if (error is DioError) {
-      failure = Failure(
-          error.response!.statusCode ?? ResponseCode.BAD_REQUEST.value,
-          error.response?.data[ApiConstants.message] ??
-              error.response?.data[ApiConstants.errors].toString() ??
-              ApiConstants.error);
+      final response = error.response;
+      final statusCode = response?.statusCode ?? ResponseCode.BAD_REQUEST.value;
+      final data = response?.data;
+
+      if (response?.statusCode == ResponseCode.UNAUTHORIZED.value) {
+        Future.delayed(
+            Duration(
+              seconds: Constants.unauthenticatedSession,
+            ), () {
+          AppSettingsSharedPreferences appSettingsSharedPreferences =
+              instance<AppSettingsSharedPreferences>();
+          appSettingsSharedPreferences.clear();
+          Get.offAllNamed(Routes.loginView);
+        });
+      }
+
+      if (data != null) {
+        final errorMessage = data[ApiConstants.message] ??
+            data[ApiConstants.error]?[ApiConstants.message] ??
+            data[ApiConstants.errors].values.first.first ??
+            ApiConstants.error;
+
+        failure = Failure(statusCode, errorMessage);
+      } else {
+        failure = Failure(statusCode, ApiConstants.error);
+      }
     } else {
-      failure =
-          Failure(ResponseCode.BAD_REQUEST.value, ApiConstants.badRequest);
+      failure = Failure(
+        ResponseCode.BAD_REQUEST.value,
+        ApiConstants.badRequest,
+      );
     }
   }
 }
