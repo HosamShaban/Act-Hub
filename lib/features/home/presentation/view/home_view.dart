@@ -1,9 +1,9 @@
 import 'package:acthub/core/resources/manager_size.dart';
+import 'package:acthub/core/resources/manager_string.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/resources/manager_colors.dart';
-import '../../../../core/resources/manager_string.dart';
 import '../../../../core/widgets/will_pop_scope.dart';
 import '../controller/home_controller.dart';
 import 'widget/custom_banner.dart';
