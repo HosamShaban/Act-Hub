@@ -2,6 +2,7 @@ import 'package:acthub/core/internet_checker/internet_checker.dart';
 import 'package:acthub/core/network/app_api.dart';
 import 'package:acthub/core/network/dio_factory.dart';
 import 'package:acthub/core/storage/local/app_settings_shared_preferences.dart';
+import 'package:acthub/core/storage/remote/firebase/controllers/fb_notificatons.dart';
 import 'package:acthub/features/auth/data/data_source/remote_login_data_source.dart';
 import 'package:acthub/features/auth/data/data_source/remote_register_data_source.dart';
 import 'package:acthub/features/auth/data/repository_impl/login_repository_impl.dart';
@@ -39,7 +40,10 @@ import 'package:acthub/features/verification/domain/repositories/verification_re
 import 'package:acthub/features/verification/domain/usecase/send_otp_usecase.dart';
 import 'package:acthub/features/verification/domain/usecase/verification_usecase.dart';
 import 'package:acthub/features/verification/presentation/controller/verification_controller.dart';
+import 'package:acthub/firebase_options.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
@@ -48,8 +52,21 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 final instance = GetIt.instance;
 
+firebaseModule() async {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  FbNotifications fb = FbNotifications();
+  await fb.requestNotificationPermissions();
+  await fb.initializeForegroundNotificationForAndroid();
+  fb.manageNotificationAction();
+  await FbNotifications.initNotifications();
+  print('object');
+  print(await FirebaseMessaging.instance.getToken());
+}
+
 initModule() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await firebaseModule();
   final SharedPreferences sharedPreferences =
       await SharedPreferences.getInstance();
 
