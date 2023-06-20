@@ -1,9 +1,10 @@
-import 'package:acthub/config/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+import '../../../../../config/constants.dart';
 
 class FbNotifications {
   static AndroidNotificationChannel? channel;
@@ -25,6 +26,7 @@ class FbNotifications {
         playSound: true,
       );
     }
+
     localNotificationsPlugin = FlutterLocalNotificationsPlugin();
     await localNotificationsPlugin
         ?.resolvePlatformSpecificImplementation<
@@ -75,13 +77,11 @@ class FbNotifications {
           notification.title,
           notification.body,
           NotificationDetails(
-            android: AndroidNotificationDetails(
-              channel!.id,
-              channel!.name,
-              channelDescription: channel!.description,
-              icon: Constants.notificationIconName,
-              playSound: true,
-            ),
+            android: AndroidNotificationDetails(channel!.id, channel!.name,
+                channelDescription: channel!.description,
+                icon: Constants.notificationIconName,
+                playSound: true,
+                importance: Importance.max),
           ),
         );
       }
