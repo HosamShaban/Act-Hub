@@ -50,7 +50,7 @@ class ResetPasswordView extends StatelessWidget {
                   ),
                   child: Container(
                     width: double.infinity,
-                    height: ManagerHeight.h490,
+                    height: ManagerHeight.h575,
                     margin: EdgeInsets.symmetric(
                       horizontal: ManagerWidth.w10,
                       vertical: ManagerHeight.h30,
