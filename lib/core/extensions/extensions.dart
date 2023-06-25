@@ -12,6 +12,16 @@ extension NonNullString on String? {
   }
 }
 
+extension NonNullLocale on String? {
+  String parseToLocale() {
+    if (this == null) {
+      return 'ar';
+    } else {
+      return this!;
+    }
+  }
+}
+
 extension NonNullDouble on double? {
   double onNull() {
     if (this == null) {
