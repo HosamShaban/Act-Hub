@@ -52,7 +52,7 @@ class HomeView extends StatelessWidget {
                     },
                   ),
                 ),
-                const CustomText(
+                CustomText(
                   name: ManagerString.popularCourses,
                   nameButton: ManagerString.viewAll,
                   buttonColor: ManagerColors.primaryColor,
