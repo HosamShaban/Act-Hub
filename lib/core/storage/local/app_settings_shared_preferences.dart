@@ -57,4 +57,10 @@ class AppSettingsSharedPreferences {
   void clear() {
     _sharedPreferences.clear();
   }
+
+  String get locale => _sharedPreferences.getString('locale').parseToLocale();
+
+  Future<void> setLocale(String locale) async {
+    await _sharedPreferences.setString(ConstantsPrefsKey.locale, locale);
+  }
 }

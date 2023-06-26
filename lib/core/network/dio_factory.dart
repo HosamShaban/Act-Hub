@@ -1,6 +1,5 @@
 import 'package:acthub/config/constants.dart';
 import 'package:acthub/config/dependency_injection.dart';
-import 'package:acthub/core/resources/manager_string.dart';
 import 'package:acthub/core/storage/local/app_settings_shared_preferences.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -57,6 +56,6 @@ class DioFactory {
   }
 
   String getAuthorization(String token) {
-    return '${ManagerString.bearer} $token';
+    return '${Constants.bearer} $token';
   }
 }

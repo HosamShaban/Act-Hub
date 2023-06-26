@@ -6,6 +6,8 @@ import 'package:acthub/features/forget_password/presentation/view/forget_pass_vi
 import 'package:acthub/features/home/presentation/view/home_view.dart';
 import 'package:acthub/features/main/presentation/view/main_view.dart';
 import 'package:acthub/features/out_boarding/presentation%20/view/out_boarding_view.dart';
+import 'package:acthub/features/profile/presentation/view/locale_view.dart';
+import 'package:acthub/features/profile/presentation/view/setting_view.dart';
 import 'package:acthub/features/reset_password/presentation/view/reset_password_view.dart';
 import 'package:acthub/features/splash/presentation/view/splash_view.dart';
 import 'package:acthub/features/verification/presentation/view/verification_view.dart';
@@ -21,6 +23,8 @@ class Routes {
   static const String registerView = '/register_view';
   static const String forget_password = '/forget_password_view';
   static const String reset_password = '/reset_password';
+  static const String setting = '/setting_view';
+  static const String localeView = '/locale_view';
 }
 
 class RouteGenerator {
@@ -53,6 +57,10 @@ class RouteGenerator {
       case Routes.reset_password:
         initResetPasswordModule();
         return MaterialPageRoute(builder: (_) => ResetPasswordView());
+      case Routes.setting:
+        return MaterialPageRoute(builder: (_) => const SettingView());
+      case Routes.localeView:
+        return MaterialPageRoute(builder: (_) => LocaleView());
       default:
         return unDefinedRoute();
     }
@@ -62,9 +70,9 @@ class RouteGenerator {
     return MaterialPageRoute(
       builder: (_) => Scaffold(
         appBar: AppBar(
-          title: const Text(ManagerString.noRoutFound),
+          title: Text(ManagerString.noRoutFound),
         ),
-        body: const Center(
+        body: Center(
           child: Text(ManagerString.noRoutFound),
         ),
       ),

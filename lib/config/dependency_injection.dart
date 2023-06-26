@@ -29,6 +29,12 @@ import 'package:acthub/features/home/domain/usecase/home_usecase.dart';
 import 'package:acthub/features/home/presentation/controller/home_controller.dart';
 import 'package:acthub/features/main/presentation/controller/main_controller.dart';
 import 'package:acthub/features/out_boarding/presentation%20/controller/out_boarding_controller.dart';
+import 'package:acthub/features/profile/data/data_source/edit_password_remote_data_source.dart';
+import 'package:acthub/features/profile/data/repository_impl/edit_password_repository_impl.dart';
+import 'package:acthub/features/profile/domain/repository/edit_password_repository.dart';
+import 'package:acthub/features/profile/domain/usecase/edit_password_usecase.dart';
+import 'package:acthub/features/profile/presentation/controller/loacle_notifier_controller.dart';
+import 'package:acthub/features/profile/presentation/controller/profile_controller.dart';
 import 'package:acthub/features/reset_password/data/data_souces/reset_password_remote_data_source.dart';
 import 'package:acthub/features/reset_password/data/repoitory_impl/reset_password_repository_impl.dart';
 import 'package:acthub/features/reset_password/domain/repositroy/reset_password_repositroy.dart';
@@ -46,6 +52,7 @@ import 'package:acthub/features/verification/domain/usecase/verification_usecase
 import 'package:acthub/features/verification/presentation/controller/verification_controller.dart';
 import 'package:acthub/firebase_options.dart';
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
@@ -70,6 +77,7 @@ firebaseModule() async {
 
 initModule() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await firebaseModule();
   final SharedPreferences sharedPreferences =
       await SharedPreferences.getInstance();
@@ -247,6 +255,31 @@ initHomeModule() {
   }
 
   Get.put<HomeController>(HomeController());
+  initProfile();
+}
+
+initProfile() {
+  initChangePassword();
+
+  Get.put<ProfileController>(ProfileController());
+  Get.put<LocaleNotifierController>(LocaleNotifierController());
+}
+
+initChangePassword() {
+  if (!GetIt.I.isRegistered<RemoteEditPasswordDataSource>()) {
+    instance.registerLazySingleton<RemoteEditPasswordDataSource>(
+        () => RemoteEditPasswordDateSourceImplement(instance()));
+  }
+
+  if (!GetIt.I.isRegistered<EditPasswordRepository>()) {
+    instance.registerLazySingleton<EditPasswordRepository>(
+        () => EditPasswordRepoImpl(instance(), instance()));
+  }
+
+  if (!GetIt.I.isRegistered<EditPasswordUseCase>()) {
+    instance.registerFactory<EditPasswordUseCase>(
+        () => EditPasswordUseCase(instance<EditPasswordRepository>()));
+  }
 }
 
 initVerificationModule() {

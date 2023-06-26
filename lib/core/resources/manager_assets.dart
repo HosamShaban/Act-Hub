@@ -1,5 +1,6 @@
 const String imagesPath = 'assets/images';
 const String jsonPath = 'assets/json';
+const String translationPath = 'assets/translation';
 
 class ManagerAssets {
   static const String background = '$imagesPath/background.png';
@@ -36,9 +37,25 @@ class ManagerAssets {
   static const String star = '$imagesPath/star.svg';
   static const String search = '$imagesPath/search.svg';
   static const String notification = '$imagesPath/notification.svg';
+  static const String air_condition = '$imagesPath/air_condition.svg';
+  static const String course_hours = '$imagesPath/course_hours.svg';
+  static const String office_chair = '$imagesPath/office_chair.svg';
+  static const String firstStepPayment = '$imagesPath/info.svg';
+  static const String secondStepPayment = '$imagesPath/card.svg';
+  static const String thirdStepPayment = '$imagesPath/document.svg';
+  static const String cashPayment = '$imagesPath/cash_payment.svg';
+  static const String submitPayment = '$imagesPath/submit_payment.svg';
+  static const String credit = '$imagesPath/creidet.svg';
+  static const String person = '$imagesPath/person.png';
 }
 
 class ManagerJson {
+  static const String loading = '$jsonPath/loading.json';
+  static const String error = '$jsonPath/error.json';
+  static const String success = '$jsonPath/success.json';
+}
+
+class ManagerTranslation {
   static const String loading = '$jsonPath/loading.json';
   static const String error = '$jsonPath/error.json';
   static const String success = '$jsonPath/success.json';

@@ -2,6 +2,7 @@ import 'package:acthub/core/resources/manager_assets.dart';
 import 'package:acthub/core/resources/manager_colors.dart';
 import 'package:acthub/core/resources/manager_size.dart';
 import 'package:acthub/features/home/presentation/view/home_view.dart';
+import 'package:acthub/features/profile/presentation/view/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
@@ -24,7 +25,7 @@ class MainController extends GetxController {
     ),
     // CategoryView(),
     // AppointmentView(),
-    // ProfileView()
+    const ProfileView()
   ];
 
   List<PersistentBottomNavBarItem> bottomNavBarItems = [

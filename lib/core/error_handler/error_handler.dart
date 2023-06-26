@@ -68,6 +68,7 @@ enum ResponseCode {
   SERVICE_UNAVAILABLE,
   GATEWAY_TIMEOUT,
   NO_INTERNET_CONNECTION,
+  UNKNOWN;
 }
 
 extension ResponseCodeExtension on ResponseCode {
@@ -103,6 +104,8 @@ extension ResponseCodeExtension on ResponseCode {
         return 504;
       case ResponseCode.NO_INTERNET_CONNECTION:
         return -1; // Or any appropriate value for "No Internet Connection"
+      case ResponseCode.UNKNOWN:
+        return -7;
     }
   }
 }
