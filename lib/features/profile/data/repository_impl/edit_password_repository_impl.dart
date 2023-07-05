@@ -26,7 +26,7 @@ class EditPasswordRepoImpl implements EditPasswordRepository {
       } catch (e) {
         try {
           return Left(Failure(ResponseCode.INTERNAL_SERVER_ERROR.value,
-              ManagerString.INTERNAL_SERVER_ERROR));
+              ManagerString.internalServerError));
         } catch (e) {
           return Left(
               Failure(ResponseCode.UNKNOWN.value, ManagerString.UNKNOWN));
