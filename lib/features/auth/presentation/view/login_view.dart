@@ -26,7 +26,7 @@ class LoginView extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  ManagerString.signIn,
+                  ManagerString.login,
                   style: getMediumTextStyle(
                     fontSize: ManagerFontSize.s24,
                     color: ManagerColors.black,
@@ -72,7 +72,7 @@ class LoginView extends StatelessWidget {
                     ),
                     mainButton(
                         child: Text(
-                          ManagerString.forgotPassword,
+                          ManagerString.forgetPassword,
                           style: getRegularTextStyle(
                               fontSize: ManagerFontSize.s14,
                               color: ManagerColors.primaryColor),
@@ -85,7 +85,7 @@ class LoginView extends StatelessWidget {
                 SizedBox(height: ManagerHeight.h90),
                 mainButton(
                     child: Text(
-                      ManagerString.signIn,
+                      ManagerString.login,
                       style: getRegularTextStyle(
                         fontSize: ManagerFontSize.s16,
                         color: ManagerColors.white,

@@ -2,6 +2,8 @@ import 'package:acthub/config/dependency_injection.dart';
 import 'package:acthub/core/resources/manager_string.dart';
 import 'package:acthub/features/auth/presentation/view/login_view.dart';
 import 'package:acthub/features/auth/presentation/view/register_view.dart';
+import 'package:acthub/features/courses/presentation/view/course_details_view.dart';
+import 'package:acthub/features/courses/presentation/view/payment_selection_view.dart';
 import 'package:acthub/features/forget_password/presentation/view/forget_pass_view.dart';
 import 'package:acthub/features/home/presentation/view/home_view.dart';
 import 'package:acthub/features/main/presentation/view/main_view.dart';
@@ -25,6 +27,8 @@ class Routes {
   static const String reset_password = '/reset_password';
   static const String setting = '/setting_view';
   static const String localeView = '/locale_view';
+  static const String courseDetailsView = '/course_details_view';
+  static const String paymentSelectionView = '/payment_selection_view';
 }
 
 class RouteGenerator {
@@ -47,7 +51,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const VerificationView());
       case Routes.mainView:
         initMainModule();
-        return MaterialPageRoute(builder: (_) => const MainView());
+        return MaterialPageRoute(builder: (_) => MainView());
       case Routes.homeView:
         initHomeModule();
         return MaterialPageRoute(builder: (_) => HomeView());
@@ -60,7 +64,13 @@ class RouteGenerator {
       case Routes.setting:
         return MaterialPageRoute(builder: (_) => const SettingView());
       case Routes.localeView:
-        return MaterialPageRoute(builder: (_) => LocaleView());
+        return MaterialPageRoute(builder: (_) => const LocaleView());
+      case Routes.courseDetailsView:
+        initCourse();
+        return MaterialPageRoute(builder: (_) => const CourseDetailsView());
+      case Routes.paymentSelectionView:
+        initSubscriptionProcess();
+        return MaterialPageRoute(builder: (_) => PaymentSelectionView());
       default:
         return unDefinedRoute();
     }
@@ -70,10 +80,10 @@ class RouteGenerator {
     return MaterialPageRoute(
       builder: (_) => Scaffold(
         appBar: AppBar(
-          title: Text(ManagerString.noRoutFound),
+          title: Text(ManagerString.noRouteFound),
         ),
         body: Center(
-          child: Text(ManagerString.noRoutFound),
+          child: Text(ManagerString.noRouteFound),
         ),
       ),
     );

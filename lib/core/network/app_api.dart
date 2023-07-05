@@ -2,8 +2,13 @@ import 'package:acthub/config/constants.dart';
 import 'package:acthub/config/request_constants.dart';
 import 'package:acthub/features/auth/data/response/fcm_token_response.dart';
 import 'package:acthub/features/auth/data/response/login_response.dart';
+import 'package:acthub/features/courses/data/response/course_details_response.dart';
+import 'package:acthub/features/courses/data/response/course_rating_response.dart';
+import 'package:acthub/features/courses/data/response/course_subscription_response.dart';
+import 'package:acthub/features/edit_profile/data/response/profile_response.dart';
 import 'package:acthub/features/forget_password/data/response/forget_password_response.dart';
 import 'package:acthub/features/home/data/response/home_response.dart';
+import 'package:acthub/features/payment/data/response/payments_response.dart';
 import 'package:acthub/features/profile/data/response/edit_password_response.dart';
 import 'package:acthub/features/reset_password/data/response/reset_password_response.dart';
 import 'package:acthub/features/verification/data/response/send_otp_response.dart';
@@ -68,5 +73,26 @@ abstract class AppApi {
   Future<EditPasswordResponse> editPassword(
     @Field(ApiConstants.password) password,
     @Field(ApiConstants.passwordConfirmation) passwordConfirmation,
+  );
+  @POST(RequestConstants.courseDetails)
+  Future<CourseDetailsResponse> courseDetails(
+    @Field(ApiConstants.courseId) courseId,
+  );
+  @GET(RequestConstants.profile)
+  Future<ProfileResponse> profile();
+
+  @GET(RequestConstants.paymentMethods)
+  Future<PaymentsResponse> paymentMethods();
+
+  @POST(RequestConstants.courseSubscription)
+  Future<CourseSubscriptionResponse> courseSubscription(
+    @Field(ApiConstants.courseId) int courseId,
+    @Field(ApiConstants.paymentMethodId) int paymentMethodId,
+  );
+
+  @POST(RequestConstants.courseRating)
+  Future<CourseRatingResponse> courseRating(
+    @Field(ApiConstants.courseId) int courseId,
+    @Field(ApiConstants.value) double val,
   );
 }

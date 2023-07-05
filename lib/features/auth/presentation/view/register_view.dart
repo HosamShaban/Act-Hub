@@ -74,7 +74,7 @@ class RegisterView extends StatelessWidget {
                   SizedBox(height: ManagerHeight.h16),
                   baseTextFormField(
                     controller: controller.confirmPassword,
-                    hintText: ManagerString.confirmPassword,
+                    hintText: ManagerString.confirmPass,
                     keyboardType: TextInputType.text,
                     obscureText: true,
                     validator: (value) => _failedValidator.validatePassword(
@@ -90,7 +90,7 @@ class RegisterView extends StatelessWidget {
                         },
                       ),
                       Text(
-                        ManagerString.agreePolicy,
+                        ManagerString.shouldAgreeTerms,
                         style: getRegularTextStyle(
                           fontSize: ManagerFontSize.s10,
                           color: ManagerColors.black,

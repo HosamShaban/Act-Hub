@@ -47,6 +47,7 @@ class ManagerAssets {
   static const String submitPayment = '$imagesPath/submit_payment.svg';
   static const String credit = '$imagesPath/creidet.svg';
   static const String person = '$imagesPath/person.png';
+  static const String course = '$imagesPath/course_image.png';
 }
 
 class ManagerJson {

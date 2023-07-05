@@ -1,9 +1,12 @@
 import 'package:acthub/config/dependency_injection.dart';
+import 'package:acthub/core/cache/cache.dart';
+import 'package:acthub/core/extensions/extensions.dart';
 import 'package:acthub/core/state_renderer/state_renderer.dart';
 import 'package:acthub/features/home/domain/model/category_model.dart';
 import 'package:acthub/features/home/domain/model/course_model.dart';
 import 'package:acthub/features/home/domain/model/slider_model.dart';
 import 'package:acthub/features/home/domain/usecase/home_usecase.dart';
+import 'package:acthub/routes/routes.dart';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,6 +24,8 @@ class HomeController extends GetxController {
 
   final HomeUseCase _homeUseCase = instance<HomeUseCase>();
 
+  CacheData cacheData = CacheData();
+
   @override
   void onInit() {
     super.onInit();
@@ -31,6 +36,17 @@ class HomeController extends GetxController {
   void change(int index) {
     current = index;
     update();
+  }
+
+  setCurrentCourseId(int id) {
+    cacheData.setCurrentCourseId(id);
+  }
+
+  performCategoryDetails(int index) {
+    setCurrentCourseId(
+      popularCourses[index].id.onNull(),
+    );
+    Navigator.pushNamed(Get.context!, Routes.courseDetailsView);
   }
 
   void selectCategory(int index) {
