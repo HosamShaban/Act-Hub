@@ -1,6 +1,8 @@
 import 'package:acthub/core/resources/manager_assets.dart';
 import 'package:acthub/core/resources/manager_colors.dart';
 import 'package:acthub/core/resources/manager_size.dart';
+import 'package:acthub/features/appointment/presentation/view/appointment_view.dart';
+import 'package:acthub/features/category/presentation/view/category_view.dart';
 import 'package:acthub/features/home/presentation/view/home_view.dart';
 import 'package:acthub/features/profile/presentation/view/profile_view.dart';
 import 'package:flutter/material.dart';
@@ -14,17 +16,8 @@ class MainController extends GetxController {
   Color color = ManagerColors.black;
   List<Widget> screens = [
     HomeView(),
-    Container(
-      color: Colors.green,
-    ),
-    Container(
-      color: Colors.yellowAccent,
-    ),
-    Container(
-      color: Colors.blue,
-    ),
-    // CategoryView(),
-    // AppointmentView(),
+    const CategoryView(),
+    const AppointmentView(),
     const ProfileView()
   ];
 
